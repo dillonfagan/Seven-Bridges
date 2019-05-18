@@ -439,75 +439,32 @@ class Graph: UIScrollView {
         // do not allow the graph to be altered during execution
         mode = .viewOnly
         
-        // the function that will be resumed should requirements be met
-        func resumeFunction() {
-            var traversals = [Path]()
-            
-            func findShortestPath(from source: Node, to sink: Node, along path: Path = Path()) -> Path? {
-                let path = Path(path)
-                path.append(source)
-                
-                if sink == source {
-                    return path
-                }
-                
-                // the shortest path that will be returned
-                var shortest: Path?
-                
-                // equals 0 when shortest is nil
-                var shortestAggregateWeight = 0
-                
-                for node in source.adjacentNodes(directed: isDirected) {
-                    if !path.contains(node) {
-                        if let newPath = findShortestPath(from: node, to: sink, along: path) {
-                            // add the new path to the history of traversals
-                            traversals.append(newPath)
-                            
-                            // calculate the aggregate weight of newPath
-                            let aggregateWeight = newPath.weight
-                            
-                            if shortest == nil || aggregateWeight < shortestAggregateWeight {
-                                shortest = newPath
-                                shortestAggregateWeight = aggregateWeight
-                            }
-                        }
-                    }
-                }
-                
-                return shortest
-            }
-            
-            // save source and sink before deselecting nodes
-            let a = selectedNodes.first!
-            let b = selectedNodes.last!
-            
-            deselectNodes()
-            
-            if let path = findShortestPath(from: a, to: b) {
-                // remove the shortest path from the traversal history
-                traversals.removeLast()
-                
-                // outline the traversals
-                for (i, path) in traversals.enumerated() {
-                    path.outline(duration: 2, wait: i * 4, color: UIColor.lightGray)
-                }
-                
-                // outline the shortest path
-                path.outline(wait: traversals.count * 4)
-            } else {
-                // create modal alert for no path found
-                Announcement.new(title: "Shortest Path", message: "No path found from \(a) to \(b).")
-            }
-        }
-        
         if !isDirected {
             // notify user that edges must be directed in order for the algorithm to run
             Announcement.new(title: "Shortest Path", message: "Edges will be made directed in order for the algorithm to run.", action: { (action: UIAlertAction!) -> Void in
                 self.isDirected = true
-                resumeFunction()
             })
+        }
+        
+        // save source and sink before deselecting nodes
+        let a = selectedNodes.first!
+        let b = selectedNodes.last!
+        
+        deselectNodes()
+    
+        let algorithm = ShortestPath(self)
+        var traversals: [Path] = algorithm.go(from: a, to: b)
+        
+        if traversals.count > 1 {
+            let shortestPath = traversals.removeLast()
+            
+            for (i, path) in traversals.enumerated() {
+                path.outline(duration: 2, wait: i * 4, color: UIColor.lightGray)
+            }
+            
+            shortestPath.outline(wait: traversals.count * 4)
         } else {
-            resumeFunction()
+            Announcement.new(title: "Shortest Path", message: "No path found from \(a) to \(b).")
         }
     }
     

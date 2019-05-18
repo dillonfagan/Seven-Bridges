@@ -18,6 +18,7 @@
 		51839D221EFDABAB003B7B40 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51839D211EFDABAB003B7B40 /* Edge.swift */; };
 		5186D1DD200C41E60043E175 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5186D1DC200C41E60043E175 /* Announcement.swift */; };
 		519732D6228FC7710034AE0A /* GraphMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519732D5228FC7710034AE0A /* GraphMode.swift */; };
+		519732DB22902F930034AE0A /* ShortestPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519732DA22902F930034AE0A /* ShortestPath.swift */; };
 		51B24C471EFDC9DF00AE209F /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B24C461EFDC9DF00AE209F /* Graph.swift */; };
 		51CA75C01F687776003D7F2D /* ActionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CA75BF1F687776003D7F2D /* ActionsController.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		51839D211EFDABAB003B7B40 /* Edge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		5186D1DC200C41E60043E175 /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
 		519732D5228FC7710034AE0A /* GraphMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphMode.swift; sourceTree = "<group>"; };
+		519732DA22902F930034AE0A /* ShortestPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortestPath.swift; sourceTree = "<group>"; };
 		51B24C461EFDC9DF00AE209F /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		51CA75BF1F687776003D7F2D /* ActionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,6 +72,7 @@
 		51839D0C1EFD9240003B7B40 /* Seven Bridges */ = {
 			isa = PBXGroup;
 			children = (
+				519732D7228FC8D20034AE0A /* Algorithms */,
 				51839D0D1EFD9240003B7B40 /* AppDelegate.swift */,
 				51839D0F1EFD9240003B7B40 /* ViewController.swift */,
 				51CA75BF1F687776003D7F2D /* ActionsController.swift */,
@@ -86,6 +89,14 @@
 				51839D191EFD9240003B7B40 /* Info.plist */,
 			);
 			path = "Seven Bridges";
+			sourceTree = "<group>";
+		};
+		519732D7228FC8D20034AE0A /* Algorithms */ = {
+			isa = PBXGroup;
+			children = (
+				519732DA22902F930034AE0A /* ShortestPath.swift */,
+			);
+			path = Algorithms;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,6 +179,7 @@
 				51CA75C01F687776003D7F2D /* ActionsController.swift in Sources */,
 				51839D101EFD9240003B7B40 /* ViewController.swift in Sources */,
 				51839D221EFDABAB003B7B40 /* Edge.swift in Sources */,
+				519732DB22902F930034AE0A /* ShortestPath.swift in Sources */,
 				51839D0E1EFD9240003B7B40 /* AppDelegate.swift in Sources */,
 				519732D6228FC7710034AE0A /* GraphMode.swift in Sources */,
 				51839D201EFD95EC003B7B40 /* Node.swift in Sources */,
