@@ -20,6 +20,7 @@
 		519732D6228FC7710034AE0A /* GraphMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519732D5228FC7710034AE0A /* GraphMode.swift */; };
 		519732DB22902F930034AE0A /* ShortestPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519732DA22902F930034AE0A /* ShortestPath.swift */; };
 		519732DD22904D780034AE0A /* Kruskal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519732DC22904D780034AE0A /* Kruskal.swift */; };
+		519732DF229051110034AE0A /* ColorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519732DE229051110034AE0A /* ColorGenerator.swift */; };
 		51B24C471EFDC9DF00AE209F /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B24C461EFDC9DF00AE209F /* Graph.swift */; };
 		51CA75C01F687776003D7F2D /* ActionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CA75BF1F687776003D7F2D /* ActionsController.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		519732D5228FC7710034AE0A /* GraphMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphMode.swift; sourceTree = "<group>"; };
 		519732DA22902F930034AE0A /* ShortestPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortestPath.swift; sourceTree = "<group>"; };
 		519732DC22904D780034AE0A /* Kruskal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kruskal.swift; sourceTree = "<group>"; };
+		519732DE229051110034AE0A /* ColorGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGenerator.swift; sourceTree = "<group>"; };
 		51B24C461EFDC9DF00AE209F /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		51CA75BF1F687776003D7F2D /* ActionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +83,7 @@
 				5186D1DC200C41E60043E175 /* Announcement.swift */,
 				51B24C461EFDC9DF00AE209F /* Graph.swift */,
 				519732D5228FC7710034AE0A /* GraphMode.swift */,
+				519732DE229051110034AE0A /* ColorGenerator.swift */,
 				511031E01FC50CCB0062F026 /* Path.swift */,
 				51839D1F1EFD95EC003B7B40 /* Node.swift */,
 				51839D211EFDABAB003B7B40 /* Edge.swift */,
@@ -185,6 +188,7 @@
 				519732DB22902F930034AE0A /* ShortestPath.swift in Sources */,
 				51839D0E1EFD9240003B7B40 /* AppDelegate.swift in Sources */,
 				519732D6228FC7710034AE0A /* GraphMode.swift in Sources */,
+				519732DF229051110034AE0A /* ColorGenerator.swift in Sources */,
 				519732DD22904D780034AE0A /* Kruskal.swift in Sources */,
 				51839D201EFD95EC003B7B40 /* Node.swift in Sources */,
 				515714B62073E17C0046573A /* UILabel+Extension.swift in Sources */,

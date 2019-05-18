@@ -9,6 +9,8 @@ import UIKit
 
 class Graph: UIScrollView {
     
+    let colorGenerator = ColorGenerator()
+    
     /// Determines the interactive behavior of the graph.
     /// When the graph is in view-only mode, the actions menu in the main view controller will be disabled.
     var mode: GraphMode = .nodes {
@@ -49,38 +51,8 @@ class Graph: UIScrollView {
         return edge(from: selectedNodes.first!, to: selectedNodes.last!, directed: false)
     }
     
-    /// Current index in the colors array for cycling through.
-    private var colorCycle = 0
-    
-    /// Colors to cycle through when adding a new node to the graph.
-    private let colors = [
-        // green
-        UIColor(red: 100/255, green: 210/255, blue: 185/255, alpha: 1.0),
-        
-        // pink
-        UIColor(red: 235/255, green: 120/255, blue: 180/255, alpha: 1.0),
-        
-        // blue
-        UIColor(red: 90/255, green: 160/255, blue: 235/255, alpha: 1.0),
-        
-        // yellow
-        UIColor(red: 245/255, green: 200/255, blue: 90/255, alpha: 1.0),
-        
-        // purple
-        UIColor(red: 195/255, green: 155/255, blue: 245/255, alpha: 1.0)
-    ]
-    
     /// ViewController that contains the graph.
     weak var parentVC: ViewController?
-    
-    /// Increments the cycle of the color assigned to the next node that is created.
-    private func incrementColorCycle() {
-        if colorCycle < colors.count - 1 {
-            colorCycle += 1
-        } else {
-            colorCycle = 0
-        }
-    }
     
     /// Clears the graph of all nodes and edges.
     func clear() {
@@ -99,7 +71,7 @@ class Graph: UIScrollView {
         nodeMatrix.removeAll()
         
         // reset color cycle
-        colorCycle = 0
+        colorGenerator.reset()
         
         // deselect all selected nodes
         selectedNodes.removeAll()
@@ -189,7 +161,7 @@ class Graph: UIScrollView {
             let location = touch.location(in: self)
             
             // create new node at location of touch
-            let node = Node(color: colors[colorCycle], at: location)
+            let node = Node(color: colorGenerator.nextColor(), at: location)
             node.label.text = String(nodes.count + 1)
             
             // add node to nodes array
@@ -200,8 +172,6 @@ class Graph: UIScrollView {
             
             // add new node to the view
             addSubview(node)
-            
-            incrementColorCycle()
         }
     }
     
@@ -739,15 +709,13 @@ class Graph: UIScrollView {
             }
             
             let point = CGPoint(x: x, y: y)
-            let node = Node(color: colors[colorCycle], at: point)
+            let node = Node(color: colorGenerator.nextColor(), at: point)
             
             node.label.text = String(i)
             
             nodeMatrix[node] = Set<Node>()
             nodes.append(node)
             addSubview(node)
-            
-            incrementColorCycle()
         }
         
         // create edge from 1 to 2
