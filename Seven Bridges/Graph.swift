@@ -7,14 +7,6 @@
 
 import UIKit
 
-/// Used to define the behavior or presentation of a Graph object.
-enum GraphMode {
-    case select
-    case viewOnly
-    case nodes
-    case edges
-}
-
 class Graph: UIScrollView {
     
     /// Determines the interactive behavior of the graph.

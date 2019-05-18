@@ -17,6 +17,7 @@
 		51839D201EFD95EC003B7B40 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51839D1F1EFD95EC003B7B40 /* Node.swift */; };
 		51839D221EFDABAB003B7B40 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51839D211EFDABAB003B7B40 /* Edge.swift */; };
 		5186D1DD200C41E60043E175 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5186D1DC200C41E60043E175 /* Announcement.swift */; };
+		519732D6228FC7710034AE0A /* GraphMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519732D5228FC7710034AE0A /* GraphMode.swift */; };
 		51B24C471EFDC9DF00AE209F /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B24C461EFDC9DF00AE209F /* Graph.swift */; };
 		51CA75C01F687776003D7F2D /* ActionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CA75BF1F687776003D7F2D /* ActionsController.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,7 @@
 		51839D1F1EFD95EC003B7B40 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		51839D211EFDABAB003B7B40 /* Edge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		5186D1DC200C41E60043E175 /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
+		519732D5228FC7710034AE0A /* GraphMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphMode.swift; sourceTree = "<group>"; };
 		51B24C461EFDC9DF00AE209F /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		51CA75BF1F687776003D7F2D /* ActionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +75,7 @@
 				51CA75BF1F687776003D7F2D /* ActionsController.swift */,
 				5186D1DC200C41E60043E175 /* Announcement.swift */,
 				51B24C461EFDC9DF00AE209F /* Graph.swift */,
+				519732D5228FC7710034AE0A /* GraphMode.swift */,
 				511031E01FC50CCB0062F026 /* Path.swift */,
 				51839D1F1EFD95EC003B7B40 /* Node.swift */,
 				51839D211EFDABAB003B7B40 /* Edge.swift */,
@@ -166,6 +169,7 @@
 				51839D101EFD9240003B7B40 /* ViewController.swift in Sources */,
 				51839D221EFDABAB003B7B40 /* Edge.swift in Sources */,
 				51839D0E1EFD9240003B7B40 /* AppDelegate.swift in Sources */,
+				519732D6228FC7710034AE0A /* GraphMode.swift in Sources */,
 				51839D201EFD95EC003B7B40 /* Node.swift in Sources */,
 				515714B62073E17C0046573A /* UILabel+Extension.swift in Sources */,
 			);
