@@ -1,13 +1,8 @@
 import Foundation
 
-public class ShortestPath {
+public class ShortestPath: Algorithm {
     
-    private var graph: Graph
     private var traversals = [Path]()
-    
-    init(_ graph: Graph) {
-        self.graph = graph
-    }
     
     func go(from source: Node, to sink: Node) -> [Path] {
         let _ = findShortestPath(from: source, to: sink)

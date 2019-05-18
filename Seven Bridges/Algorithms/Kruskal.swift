@@ -1,16 +1,14 @@
 import Foundation
 
-public class Kruskal {
+public class Kruskal: Algorithm {
     
-    private var graph: Graph
-    
-    private var pool: Set<Node>
+    private var pool: Set<Node>!
     private var distance = [Node: Int]() // distance from a node to the root
     private var parent = [Node: Node?]()
     private var children = [Node: [Node]]()
     
-    init(_ graph: Graph) {
-        self.graph = graph
+    override init(_ graph: Graph) {
+        super.init(graph)
         pool = Set<Node>(self.graph.nodes)
     }
     
