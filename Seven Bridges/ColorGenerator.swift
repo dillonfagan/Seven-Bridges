@@ -25,7 +25,12 @@ public class ColorGenerator {
     
     public func nextColor() -> UIColor {
         let color = colors[colorIndex]
-        colorIndex += 1
+        
+        if colorIndex < colors.count - 1 {
+            colorIndex += 1
+        } else {
+            colorIndex = 0
+        }
         
         return color
     }
