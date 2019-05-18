@@ -193,7 +193,7 @@ class Path: CustomStringConvertible {
     /// - parameter of: A node in the path.
     ///
     func parent(of node: Node) -> Node? {
-        if let index = nodes.index(of: node) {
+        if let index = nodes.firstIndex(of: node) {
             if index > 0 {
                 return nodes[index - 1]
             }

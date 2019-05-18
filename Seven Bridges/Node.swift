@@ -235,7 +235,7 @@ import UIKit
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // bring touched node to front
-        superview?.bringSubview(toFront: self)
+        superview?.bringSubviewToFront(self)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

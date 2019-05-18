@@ -152,7 +152,7 @@ class Graph: UIScrollView {
             addSubview(edge)
             
             // send edge to the back
-            sendSubview(toBack: edge)
+            sendSubviewToBack(edge)
             
             // add to edge set
             edges.insert(edge)
@@ -178,7 +178,7 @@ class Graph: UIScrollView {
         addSubview(edge)
         
         // send edge to the back
-        sendSubview(toBack: edge)
+        sendSubviewToBack(edge)
         
         // add to edge set
         edges.insert(edge)
@@ -225,7 +225,7 @@ class Graph: UIScrollView {
             node.isSelected = false
             
             // remove node from the array
-            selectedNodes.remove(at: selectedNodes.index(of: node)!)
+            selectedNodes.remove(at: selectedNodes.firstIndex(of: node)!)
         } else {
             // update state of node
             node.isSelected = true
@@ -326,18 +326,18 @@ class Graph: UIScrollView {
             edge.removeFromSuperview()
             
             // remove edge from its start node
-            if let index = edge.startNode?.edges.index(of: edge) {
+            if let index = edge.startNode?.edges.firstIndex(of: edge) {
                 edge.startNode?.edges.remove(at: index)
             }
             
             // remove edge from its end node
-            if let index = edge.endNode?.edges.index(of: edge) {
+            if let index = edge.endNode?.edges.firstIndex(of: edge) {
                 edge.endNode?.edges.remove(at: index)
             }
         }
         
         // remove node from the nodes array
-        nodes.remove(at: nodes.index(of: node)!)
+        nodes.remove(at: nodes.firstIndex(of: node)!)
         
         // remove node from the matrix
         nodeMatrix.removeValue(forKey: node)
