@@ -28,10 +28,10 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
         
         // prepare the actions menu
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        actionsNVC = storyboard.instantiateViewController(withIdentifier: "actionsNavController") as! UINavigationController
+        actionsNVC = storyboard.instantiateViewController(withIdentifier: "actionsNavController") as? UINavigationController
         actionsNVC.modalPresentationStyle = .popover
         
-        actionsVC = actionsNVC.topViewController as! ActionsController
+        actionsVC = actionsNVC.topViewController as? ActionsController
         actionsVC.graph = graph
         actionsVC.viewControllerDelegate = self
     }

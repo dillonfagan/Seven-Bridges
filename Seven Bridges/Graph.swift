@@ -7,15 +7,9 @@
 
 import UIKit
 
-/// Used to define the behavior or presentation of a Graph object.
-enum GraphMode {
-    case select
-    case viewOnly
-    case nodes
-    case edges
-}
-
-class Graph: UIScrollView {
+class Graph: UIView {
+    
+    let colorGenerator = ColorGenerator()
     
     /// Determines the interactive behavior of the graph.
     /// When the graph is in view-only mode, the actions menu in the main view controller will be disabled.
@@ -57,38 +51,8 @@ class Graph: UIScrollView {
         return edge(from: selectedNodes.first!, to: selectedNodes.last!, directed: false)
     }
     
-    /// Current index in the colors array for cycling through.
-    private var colorCycle = 0
-    
-    /// Colors to cycle through when adding a new node to the graph.
-    private let colors = [
-        // green
-        UIColor(red: 100/255, green: 210/255, blue: 185/255, alpha: 1.0),
-        
-        // pink
-        UIColor(red: 235/255, green: 120/255, blue: 180/255, alpha: 1.0),
-        
-        // blue
-        UIColor(red: 90/255, green: 160/255, blue: 235/255, alpha: 1.0),
-        
-        // yellow
-        UIColor(red: 245/255, green: 200/255, blue: 90/255, alpha: 1.0),
-        
-        // purple
-        UIColor(red: 195/255, green: 155/255, blue: 245/255, alpha: 1.0)
-    ]
-    
     /// ViewController that contains the graph.
     weak var parentVC: ViewController?
-    
-    /// Increments the cycle of the color assigned to the next node that is created.
-    private func incrementColorCycle() {
-        if colorCycle < colors.count - 1 {
-            colorCycle += 1
-        } else {
-            colorCycle = 0
-        }
-    }
     
     /// Clears the graph of all nodes and edges.
     func clear() {
@@ -107,7 +71,7 @@ class Graph: UIScrollView {
         nodeMatrix.removeAll()
         
         // reset color cycle
-        colorCycle = 0
+        colorGenerator.reset()
         
         // deselect all selected nodes
         selectedNodes.removeAll()
@@ -152,7 +116,7 @@ class Graph: UIScrollView {
             addSubview(edge)
             
             // send edge to the back
-            sendSubview(toBack: edge)
+            sendSubviewToBack(edge)
             
             // add to edge set
             edges.insert(edge)
@@ -178,7 +142,7 @@ class Graph: UIScrollView {
         addSubview(edge)
         
         // send edge to the back
-        sendSubview(toBack: edge)
+        sendSubviewToBack(edge)
         
         // add to edge set
         edges.insert(edge)
@@ -197,7 +161,7 @@ class Graph: UIScrollView {
             let location = touch.location(in: self)
             
             // create new node at location of touch
-            let node = Node(color: colors[colorCycle], at: location)
+            let node = Node(color: colorGenerator.nextColor(), at: location)
             node.label.text = String(nodes.count + 1)
             
             // add node to nodes array
@@ -208,8 +172,6 @@ class Graph: UIScrollView {
             
             // add new node to the view
             addSubview(node)
-            
-            incrementColorCycle()
         }
     }
     
@@ -225,7 +187,7 @@ class Graph: UIScrollView {
             node.isSelected = false
             
             // remove node from the array
-            selectedNodes.remove(at: selectedNodes.index(of: node)!)
+            selectedNodes.remove(at: selectedNodes.firstIndex(of: node)!)
         } else {
             // update state of node
             node.isSelected = true
@@ -326,18 +288,18 @@ class Graph: UIScrollView {
             edge.removeFromSuperview()
             
             // remove edge from its start node
-            if let index = edge.startNode?.edges.index(of: edge) {
+            if let index = edge.startNode?.edges.firstIndex(of: edge) {
                 edge.startNode?.edges.remove(at: index)
             }
             
             // remove edge from its end node
-            if let index = edge.endNode?.edges.index(of: edge) {
+            if let index = edge.endNode?.edges.firstIndex(of: edge) {
                 edge.endNode?.edges.remove(at: index)
             }
         }
         
         // remove node from the nodes array
-        nodes.remove(at: nodes.index(of: node)!)
+        nodes.remove(at: nodes.firstIndex(of: node)!)
         
         // remove node from the matrix
         nodeMatrix.removeValue(forKey: node)
@@ -447,75 +409,32 @@ class Graph: UIScrollView {
         // do not allow the graph to be altered during execution
         mode = .viewOnly
         
-        // the function that will be resumed should requirements be met
-        func resumeFunction() {
-            var traversals = [Path]()
-            
-            func findShortestPath(from source: Node, to sink: Node, along path: Path = Path()) -> Path? {
-                let path = Path(path)
-                path.append(source)
-                
-                if sink == source {
-                    return path
-                }
-                
-                // the shortest path that will be returned
-                var shortest: Path?
-                
-                // equals 0 when shortest is nil
-                var shortestAggregateWeight = 0
-                
-                for node in source.adjacentNodes(directed: isDirected) {
-                    if !path.contains(node) {
-                        if let newPath = findShortestPath(from: node, to: sink, along: path) {
-                            // add the new path to the history of traversals
-                            traversals.append(newPath)
-                            
-                            // calculate the aggregate weight of newPath
-                            let aggregateWeight = newPath.weight
-                            
-                            if shortest == nil || aggregateWeight < shortestAggregateWeight {
-                                shortest = newPath
-                                shortestAggregateWeight = aggregateWeight
-                            }
-                        }
-                    }
-                }
-                
-                return shortest
-            }
-            
-            // save source and sink before deselecting nodes
-            let a = selectedNodes.first!
-            let b = selectedNodes.last!
-            
-            deselectNodes()
-            
-            if let path = findShortestPath(from: a, to: b) {
-                // remove the shortest path from the traversal history
-                traversals.removeLast()
-                
-                // outline the traversals
-                for (i, path) in traversals.enumerated() {
-                    path.outline(duration: 2, wait: i * 4, color: UIColor.lightGray)
-                }
-                
-                // outline the shortest path
-                path.outline(wait: traversals.count * 4)
-            } else {
-                // create modal alert for no path found
-                Announcement.new(title: "Shortest Path", message: "No path found from \(a) to \(b).")
-            }
-        }
-        
         if !isDirected {
             // notify user that edges must be directed in order for the algorithm to run
             Announcement.new(title: "Shortest Path", message: "Edges will be made directed in order for the algorithm to run.", action: { (action: UIAlertAction!) -> Void in
                 self.isDirected = true
-                resumeFunction()
             })
+        }
+        
+        // save source and sink before deselecting nodes
+        let a = selectedNodes.first!
+        let b = selectedNodes.last!
+        
+        deselectNodes()
+    
+        let algorithm = ShortestPath(self)
+        var traversals: [Path] = algorithm.go(from: a, to: b)
+        
+        if traversals.count > 1 {
+            let shortestPath = traversals.removeLast()
+            
+            for (i, path) in traversals.enumerated() {
+                path.outline(duration: 2, wait: i * 4, color: UIColor.lightGray)
+            }
+            
+            shortestPath.outline(wait: traversals.count * 4)
         } else {
-            resumeFunction()
+            Announcement.new(title: "Shortest Path", message: "No path found from \(a) to \(b).")
         }
     }
     
@@ -528,83 +447,16 @@ class Graph: UIScrollView {
         
         mode = .viewOnly // make graph view-only
         
-        func resumeFunction() {
-            var pool = Set<Node>(nodes) // all nodes
-            var distance = [Node: Int]() // distance from a node to the root
-            var parent = [Node: Node?]()
-            var children = [Node: [Node]]()
-            
-            // finds the node with the minimum distance from a dictionary
-            func getMin(from d: [Node: Int]) -> Node {
-                var shortest: Node?
-                
-                for (node, distance) in d {
-                    if shortest == nil || distance < d[shortest!]! {
-                        shortest = node
-                    }
-                }
-                
-                return shortest!
-            }
-            
-            // "initialize" all nodes
-            for node in pool {
-                distance[node] = Int.max // distance is "infinity"
-                parent[node] = nil
-                children[node] = [Node]()
-            }
-            
-            var root = selectedNodes.first!
-            distance[root] = 0 // distance from root to itself is 0
-            
-            while !pool.isEmpty {
-                let currentNode = getMin(from: distance)
-                
-                distance.removeValue(forKey: currentNode)
-                pool.remove(currentNode)
-                
-                for nextNode in currentNode.adjacentNodes(directed: false) {
-                    if let edge = currentNode.getEdge(to: nextNode) {
-                        let newDistance = edge.weight
-                        
-                        if pool.contains(nextNode) && newDistance < distance[nextNode]! {
-                            parent[nextNode] = currentNode
-                            children[currentNode]!.append(nextNode)
-                            distance[nextNode] = newDistance
-                        }
-                    }
-                }
-            }
-            
-            deselectNodes()
-            
-            // tree as path of edges
-            var path = Path()
-            
-            // recurses through the children dictionary to build a path of edges
-            func buildPath(from parent: Node) {
-                for child in children[parent]! {
-                    if let edge = parent.getEdge(to: child) {
-                        path.append(edge)
-                        buildPath(from: child)
-                    }
-                }
-            }
-            
-            buildPath(from: root)
-            
-            path.outline(wait: 0)
-        }
-        
         if isDirected {
             // notify user that edges must be undirected in order for the algorithm to run
             Announcement.new(title: "Minimum Spanning Tree", message: "Edges will be made undirected in order for the algorithm to run.", action: { (action: UIAlertAction!) -> Void in
                 self.isDirected = false
-                resumeFunction()
             })
-        } else {
-            resumeFunction()
         }
+        
+        let algorithm = Kruskal(self)
+        let path = algorithm.go()
+        path.outline(wait: 0)
     }
     
     /// Kruskal's Algorithm
@@ -857,15 +709,13 @@ class Graph: UIScrollView {
             }
             
             let point = CGPoint(x: x, y: y)
-            let node = Node(color: colors[colorCycle], at: point)
+            let node = Node(color: colorGenerator.nextColor(), at: point)
             
             node.label.text = String(i)
             
             nodeMatrix[node] = Set<Node>()
             nodes.append(node)
             addSubview(node)
-            
-            incrementColorCycle()
         }
         
         // create edge from 1 to 2
