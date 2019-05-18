@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Graph: UIScrollView {
+class Graph: UIView {
     
     let colorGenerator = ColorGenerator()
     
