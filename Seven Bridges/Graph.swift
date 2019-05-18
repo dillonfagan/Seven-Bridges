@@ -477,83 +477,16 @@ class Graph: UIScrollView {
         
         mode = .viewOnly // make graph view-only
         
-        func resumeFunction() {
-            var pool = Set<Node>(nodes) // all nodes
-            var distance = [Node: Int]() // distance from a node to the root
-            var parent = [Node: Node?]()
-            var children = [Node: [Node]]()
-            
-            // finds the node with the minimum distance from a dictionary
-            func getMin(from d: [Node: Int]) -> Node {
-                var shortest: Node?
-                
-                for (node, distance) in d {
-                    if shortest == nil || distance < d[shortest!]! {
-                        shortest = node
-                    }
-                }
-                
-                return shortest!
-            }
-            
-            // "initialize" all nodes
-            for node in pool {
-                distance[node] = Int.max // distance is "infinity"
-                parent[node] = nil
-                children[node] = [Node]()
-            }
-            
-            var root = selectedNodes.first!
-            distance[root] = 0 // distance from root to itself is 0
-            
-            while !pool.isEmpty {
-                let currentNode = getMin(from: distance)
-                
-                distance.removeValue(forKey: currentNode)
-                pool.remove(currentNode)
-                
-                for nextNode in currentNode.adjacentNodes(directed: false) {
-                    if let edge = currentNode.getEdge(to: nextNode) {
-                        let newDistance = edge.weight
-                        
-                        if pool.contains(nextNode) && newDistance < distance[nextNode]! {
-                            parent[nextNode] = currentNode
-                            children[currentNode]!.append(nextNode)
-                            distance[nextNode] = newDistance
-                        }
-                    }
-                }
-            }
-            
-            deselectNodes()
-            
-            // tree as path of edges
-            var path = Path()
-            
-            // recurses through the children dictionary to build a path of edges
-            func buildPath(from parent: Node) {
-                for child in children[parent]! {
-                    if let edge = parent.getEdge(to: child) {
-                        path.append(edge)
-                        buildPath(from: child)
-                    }
-                }
-            }
-            
-            buildPath(from: root)
-            
-            path.outline(wait: 0)
-        }
-        
         if isDirected {
             // notify user that edges must be undirected in order for the algorithm to run
             Announcement.new(title: "Minimum Spanning Tree", message: "Edges will be made undirected in order for the algorithm to run.", action: { (action: UIAlertAction!) -> Void in
                 self.isDirected = false
-                resumeFunction()
             })
-        } else {
-            resumeFunction()
         }
+        
+        let algorithm = Kruskal(self)
+        let path = algorithm.go()
+        path.outline(wait: 0)
     }
     
     /// Kruskal's Algorithm
