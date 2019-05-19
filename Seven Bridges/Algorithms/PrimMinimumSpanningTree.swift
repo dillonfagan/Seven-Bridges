@@ -1,6 +1,6 @@
 import Foundation
 
-public class Kruskal: Algorithm {
+public class PrimMinimumSpanningTree: Algorithm {
     
     private var pool: Set<Node>!
     private var distance = [Node: Int]() // distance from a node to the root
