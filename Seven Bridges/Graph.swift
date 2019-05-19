@@ -422,7 +422,7 @@ class Graph: UIView {
         
         deselectNodes()
     
-        let algorithm = ShortestPath(self)
+        let algorithm = DijkstraShortestPath(self)
         var traversals: [Path] = algorithm.go(from: a, to: b)
         
         if traversals.count > 1 {
@@ -454,7 +454,7 @@ class Graph: UIView {
             })
         }
         
-        let algorithm = Kruskal(self)
+        let algorithm = PrimMinimumSpanningTree(self)
         let path = algorithm.go()
         path.outline(wait: 0)
     }
