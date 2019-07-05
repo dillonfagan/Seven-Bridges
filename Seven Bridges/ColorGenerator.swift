@@ -2,10 +2,8 @@ import UIKit
 
 public class ColorGenerator {
     
-    /// Current index in the colors array for cycling through.
     private var colorIndex = 0
     
-    /// Colors to cycle through when adding a new node to the graph.
     private let colors = [
         // green
         UIColor(red: 100/255, green: 210/255, blue: 185/255, alpha: 1.0),
@@ -26,13 +24,17 @@ public class ColorGenerator {
     public func nextColor() -> UIColor {
         let color = colors[colorIndex]
         
+        updateColorIndex()
+        
+        return color
+    }
+    
+    private func updateColorIndex() {
         if colorIndex < colors.count - 1 {
             colorIndex += 1
         } else {
             colorIndex = 0
         }
-        
-        return color
     }
     
     public func reset() {
