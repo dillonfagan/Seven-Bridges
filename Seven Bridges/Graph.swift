@@ -466,20 +466,65 @@ class Graph: UIView {
         
         mode = .viewOnly
         
+        func resumeFunction() {
+            var s = [Edge](edges) // all edges in the graph
+            var f = Set<Set<Node>>() // forest of trees
+            
+            let e = Path() // edges in the final tree
+            
+            // sort edges by weight
+            s = s.sorted(by: {
+                $0.weight < $1.weight
+            })
+            
+            // create tree in forest for each node
+            for node in nodes {
+                var tree = Set<Node>()
+                tree.insert(node)
+                
+                f.insert(tree)
+            }
+            
+            // loop through edges
+            for edge in s {
+                // tree containing start node of edge
+                let u = f.first(where: { set in
+                    set.contains(edge.startNode!)
+                })
+                
+                // tree containing end node of edge
+                let y = f.first(where: { set in
+                    set.contains(edge.endNode!)
+                })
+                
+                if u != y {
+                    // union u and y, add to f, and delete u and y
+                    let uy = u?.union(y!)
+                    f.remove(u!)
+                    f.remove(y!)
+                    f.insert(uy!)
+                    
+                    e.append(edge)
+                }
+            }
+            
+            deselectNodes()
+            
+            e.outline()
+        }
+        
         if isDirected {
             // notify user that edges must be undirected in order for the algorithm to run
             Announcement.new(title: "Minimum Spanning Tree", message: "Edges will be made undirected in order for the algorithm to run.", action: { (action: UIAlertAction!) -> Void in
                 self.isDirected = false
+                resumeFunction()
             })
+        } else {
+            resumeFunction()
         }
-        
-        deselectNodes()
-        
-        let algorithm = KruskalMinimumSpanningTree(self)
-        let result = algorithm.go()
-        result.outline()
     }
     
+    /// Ford-Fulkerson max flow algorithm
     func fordFulkersonMaxFlow() {
         guard mode == .select && selectedNodes.count == 2 else {
             Announcement.new(title: "Ford-Fulkerson", message: "Please select two nodes for calculating max flow before running the Ford-Fulkerson algorithm.")
@@ -492,10 +537,83 @@ class Graph: UIView {
         let sink = selectedNodes.last!
         deselectNodes()
         
-        let algorithm = FordFulkersonMaxFlow(self)
+        // Create a network structure to emulate a residual graph.
+        var reverse = [Edge: Edge]()
+        var net = [Node: Set<Edge>]()
+        for edge in edges {
+            edge.flow = 0
+            
+            let backwardEdge = Edge()
+            backwardEdge.isHidden = true
+            backwardEdge.startNode = edge.endNode
+            backwardEdge.endNode = edge.startNode
+            backwardEdge.weight = 0
+            backwardEdge.flow = 0
+            
+            reverse[edge] = backwardEdge
+            reverse[backwardEdge] = edge
+            
+            if net[edge.startNode] == nil {
+                net[edge.startNode] = Set<Edge>()
+            }
+            
+            if net[backwardEdge.startNode] == nil {
+                net[backwardEdge.startNode] = Set<Edge>()
+            }
+            
+            net[edge.startNode]?.insert(edge)
+            net[backwardEdge.startNode]?.insert(backwardEdge)
+        }
         
-        let maxFlow = algorithm.go(from: source, to: sink)
-        let iterations = algorithm.iterations
+        // Returns an augmenting path if one exists. Otherwise, returns nil.
+        func augmentingPath(from source: Node, to sink: Node, along path: Path = Path()) -> Path? {
+            if source == sink {
+                return path
+            }
+            
+            for edge in net[source]! {
+                if edge.residualCapacity! > 0 && !path.edges.contains(edge) {
+                    let newPath = Path(path)
+                    newPath.append(edge, ignoreNodes: true)
+                    
+                    if let result = augmentingPath(from: edge.endNode, to: sink, along: newPath) {
+                        return result
+                    }
+                }
+            }
+            
+            return nil
+        }
+        
+        // Counts the path iterations in order to properly delay the announcement after path outlining is done.
+        var iterations = 0
+        
+        var maxFlow = 0
+        
+        // While there is a path from s to t where all edges have capacity > 0...
+        while let path = augmentingPath(from: source, to: sink) {
+            // ...move flow along edges in path.
+            if let residualCapacity = path.residualCapacity {
+                maxFlow += residualCapacity
+                
+                for edge in path.edges {
+                    edge.flow! += residualCapacity
+                    reverse[edge]!.flow! -= residualCapacity
+                    
+                    // Update the edge's label in sync with the path outlining.
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4 * iterations), execute: {
+                        edge.updateLabel(transitionDuration: 1)
+                    })
+                }
+                
+                // Skip outlining paths that contain backward edges.
+                if path.isSequential {
+                    path.outline(duration: 2, wait: 4 * iterations)
+                    
+                    iterations += 1
+                }
+            }
+        }
         
         // Announce the max flow when all path outlining has completed.
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4 * iterations), execute: {
@@ -515,8 +633,46 @@ class Graph: UIView {
         
         mode = .viewOnly
         
-        let algorithm = BronKerboschMaxClique(self)
-        let maxClique = algorithm.go()
+        // stores the clique iteration with the most nodes
+        // this will hold the maximal clique
+        var maxClique: Set<Node>?
+        
+        // recursively finds a clique
+        // when finished, the maximal clique should be stored in the maxClique variable
+        func recurse(r: inout Set<Node>, p: inout Set<Node>, x: inout Set<Node>) {
+            if p.isEmpty && x.isEmpty {
+                // r should now be a maximal clique, so insert into cliques and return
+                if maxClique == nil || r.count > (maxClique?.count)! {
+                    maxClique = r
+                }
+                
+                return
+            }
+            
+            // create mutable copies of p and x
+            var pCopy = Set<Node>(p)
+            var xCopy = Set<Node>(x)
+            
+            for node in p {
+                r.insert(node)
+                
+                var pu = pCopy.intersection(node.adjacentNodes(directed: false))
+                var xu = xCopy.intersection(node.adjacentNodes(directed: false))
+                
+                recurse(r: &r, p: &pu, x: &xu)
+                
+                r.remove(node)
+                pCopy.remove(node)
+                xCopy.insert(node)
+            }
+        }
+        
+        // initial sets for the algorithm
+        var r = Set<Node>()
+        var p = Set<Node>(nodes)
+        var x = Set<Node>()
+        
+        recurse(r: &r, p: &p, x: &x)
         
         if maxClique == nil || (maxClique?.isEmpty)! {
             Announcement.new(title: "Bron-Kerbosch", message: "No community could be found in the graph.")
