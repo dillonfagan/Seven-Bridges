@@ -2,9 +2,9 @@ import Foundation
 
 public class Algorithm {
     
-    var graph: GraphData
+    var graph: Graph
     
-    init(_ graph: GraphData) {
+    init(_ graph: Graph) {
         self.graph = graph
     }
 }

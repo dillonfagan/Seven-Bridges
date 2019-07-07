@@ -7,7 +7,7 @@ public class PrimMinimumSpanningTree: Algorithm {
     private var parent = [Node: Node?]()
     private var children = [Node: [Node]]()
     
-    override init(_ graph: GraphData) {
+    override init(_ graph: Graph) {
         super.init(graph)
         pool = Set<Node>(self.graph.nodes)
     }

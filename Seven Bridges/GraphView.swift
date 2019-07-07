@@ -7,12 +7,6 @@
 
 import UIKit
 
-class GraphData {
-    var nodes = [Node]()
-    var edges = Set<Edge>()
-    var nodeMatrix = [Node: Set<Node>]()
-}
-
 class GraphView: UIView {
     
     let colorGenerator = ColorGenerator()
@@ -38,16 +32,14 @@ class GraphView: UIView {
         }
     }
     
-    var graphData = GraphData()
+    var graphData = Graph()
     
     /// Nodes that have been selected.
     var selectedNodes = [Node]()
     
     /// Returns the selected edge when exactly two adjacent nodes are selected. Otherwise, returns nil.
     var selectedEdge: Edge? {
-        guard selectedNodes.count == 2 else { return nil }
-        
-        return edge(from: selectedNodes.first!, to: selectedNodes.last!, directed: false)
+        return selectedNodes.count == 2 ? edge(from: selectedNodes.first!, to: selectedNodes.last!, directed: false) : nil
     }
     
     /// ViewController that contains the graph.
@@ -60,22 +52,9 @@ class GraphView: UIView {
             subview.removeFromSuperview()
         }
         
-        // delete all nodes
-        graphData.nodes.removeAll()
-        
-        // delete all edges
-        graphData.edges.removeAll()
-        
-        // reset matrix form
-        graphData.nodeMatrix.removeAll()
-        
-        // reset color cycle
+        deselectNodes()
+        graphData = Graph()
         colorGenerator.reset()
-        
-        // deselect all selected nodes
-        selectedNodes.removeAll()
-        
-        // update the properties toolbar so that it is hidden
         updatePropertiesToolbar()
     }
     
@@ -677,7 +656,7 @@ class GraphView: UIView {
         if maxClique == nil || (maxClique?.isEmpty)! {
             Announcement.new(title: "Bron-Kerbosch", message: "No community could be found in the graph.")
         } else {
-            // highlight the max clique
+            deselectNodes()
             maxClique?.forEach({ $0.highlighted() })
         }
     }
