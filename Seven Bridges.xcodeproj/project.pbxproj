@@ -13,6 +13,7 @@
 		5119378222D17D8200AFB3DA /* PrimMinimumSpanningTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119377F22D17D8200AFB3DA /* PrimMinimumSpanningTree.swift */; };
 		5119378422D2328900AFB3DA /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119378322D2328900AFB3DA /* Graph.swift */; };
 		5119378622D2466600AFB3DA /* FlowNetworkTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119378522D2466600AFB3DA /* FlowNetworkTemplate.swift */; };
+		5119378822D2603E00AFB3DA /* KruskalMinimumSpanningTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119378722D2603E00AFB3DA /* KruskalMinimumSpanningTree.swift */; };
 		515714B62073E17C0046573A /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515714B52073E17C0046573A /* UILabel+Extension.swift */; };
 		51839D0E1EFD9240003B7B40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51839D0D1EFD9240003B7B40 /* AppDelegate.swift */; };
 		51839D101EFD9240003B7B40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51839D0F1EFD9240003B7B40 /* ViewController.swift */; };
@@ -35,6 +36,7 @@
 		5119377F22D17D8200AFB3DA /* PrimMinimumSpanningTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimMinimumSpanningTree.swift; sourceTree = "<group>"; };
 		5119378322D2328900AFB3DA /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		5119378522D2466600AFB3DA /* FlowNetworkTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowNetworkTemplate.swift; sourceTree = "<group>"; };
+		5119378722D2603E00AFB3DA /* KruskalMinimumSpanningTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KruskalMinimumSpanningTree.swift; sourceTree = "<group>"; };
 		515714B52073E17C0046573A /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		51839D0A1EFD9240003B7B40 /* Seven Bridges.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Seven Bridges.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		51839D0D1EFD9240003B7B40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				5119377D22D17D8200AFB3DA /* Algorithm.swift */,
 				5119377E22D17D8200AFB3DA /* DijkstraShortestPath.swift */,
 				5119377F22D17D8200AFB3DA /* PrimMinimumSpanningTree.swift */,
+				5119378722D2603E00AFB3DA /* KruskalMinimumSpanningTree.swift */,
 			);
 			path = Algorithms;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				5186D1DD200C41E60043E175 /* Announcement.swift in Sources */,
 				51B24C471EFDC9DF00AE209F /* GraphView.swift in Sources */,
 				5119378622D2466600AFB3DA /* FlowNetworkTemplate.swift in Sources */,
+				5119378822D2603E00AFB3DA /* KruskalMinimumSpanningTree.swift in Sources */,
 				511031E11FC50CCB0062F026 /* Path.swift in Sources */,
 				51CA75C01F687776003D7F2D /* ActionsController.swift in Sources */,
 				51839D101EFD9240003B7B40 /* ViewController.swift in Sources */,
