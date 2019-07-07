@@ -48,6 +48,15 @@ class Graph {
         nodeMatrix[edge.endNode]?.remove(edge.startNode)
     }
     
+    func removeAllEdges() {
+        for node in nodes {
+            node.edges.removeAll()
+            nodeMatrix[node]?.removeAll()
+        }
+        
+        edges.removeAll()
+    }
+    
     func edge(from a: Node, to b: Node, isDirected: Bool = true) -> Edge? {
         return isDirected ? edges.first(where: { $0.startNode == a && $0.endNode == b })
             : a.edges.first(where: { $0.startNode == b || $0.endNode == b })

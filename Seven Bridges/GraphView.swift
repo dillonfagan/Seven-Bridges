@@ -239,19 +239,11 @@ class GraphView: UIView {
     
     /// Removes all edges from the graph.
     func removeAllEdges() {
-        // remove all edges from each node and empty all connections from the matrix
-        for node in graph.nodes {
-            node.edges.removeAll()
-            graph.nodeMatrix[node]?.removeAll()
-        }
-        
-        // remove all edges from view
         for edge in graph.edges {
             edge.removeFromSuperview()
         }
         
-        // remove all from edges set
-        graph.edges.removeAll()
+        graph.removeAllEdges()
     }
     
     /// Shifts a selected edge's weight by a given integer value.
