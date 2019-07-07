@@ -32,7 +32,7 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
         actionsNVC.modalPresentationStyle = .popover
         
         actionsVC = actionsNVC.topViewController as? ActionsController
-        actionsVC.graph = graph
+        actionsVC.graphView = graph
         actionsVC.viewControllerDelegate = self
     }
     

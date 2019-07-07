@@ -13,7 +13,7 @@ class ActionsController: UITableViewController {
     weak var viewControllerDelegate: ViewController!
     
     /// The graph that the actions will be applied to.
-    weak var graph: GraphView!
+    weak var graphView: GraphView!
     
     /// Dismisses the view when the close button is tapped.
     ///
@@ -28,7 +28,7 @@ class ActionsController: UITableViewController {
     /// - parameter sender: The toggle switch.
     ///
     @IBAction func toggleDirectedEdges(_ sender: UISwitch) {
-        graph.isDirected = sender.isOn
+        graphView.isDirected = sender.isOn
     }
     
     /// Called when a cell in the table is selected.
@@ -67,11 +67,11 @@ class ActionsController: UITableViewController {
     private func quickAction(at row: Int) {
         switch row {
         case 0:
-            graph.renumberNodes()
+            graphView.renumberNodes()
         case 1:
-            graph.resetAllEdgeWeights()
+            graphView.resetAllEdgeWeights()
         case 2:
-            graph.removeAllEdges()
+            graphView.removeAllEdges()
         default:
             print("A cell was selected in row: \(row)")
         }
@@ -82,17 +82,19 @@ class ActionsController: UITableViewController {
     /// - parameter at: The row of the cell.
     ///
     private func algorithm(at row: Int) {
+        let algorithmController = AlgorithmController()
+        
         switch row {
         case 0:
-            graph.shortestPath()
+            algorithmController.dijkstraShortestPath(graphView)
         case 1:
-            graph.primMinimumSpanningTree()
+            algorithmController.primMinimumSpanningTree(graphView)
         case 2:
-            graph.kruskalMinimumSpanningTree()
+            algorithmController.kruskalMinimumSpanningTree(graphView)
         case 3:
-            graph.fordFulkersonMaxFlow()
+            algorithmController.fordFulkersonMaxFlow(graphView)
         case 4:
-            graph.bronKerbosch()
+            algorithmController.bronKerboschMaxClique(graphView)
         default:
             print("A cell was selected in row: \(row)")
         }
@@ -105,7 +107,7 @@ class ActionsController: UITableViewController {
     private func template(at row: Int) {
         switch row {
         case 0:
-            graph.prepareFlowNetworkExample()
+            graphView.prepareFlowNetworkExample()
         default:
             print("A cell was selected in row: \(row)")
         }
