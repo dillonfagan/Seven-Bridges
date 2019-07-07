@@ -9,7 +9,7 @@ import UIKit
 
 class GraphView: UIView {
     
-    private let colorGenerator = ColorGenerator()
+    let colorGenerator = ColorGenerator()
     
     /// Determines the interactive behavior of the graph.
     /// When the graph is in view-only mode, the actions menu in the main view controller will be disabled.
@@ -570,68 +570,7 @@ class GraphView: UIView {
     /// Prepares a pre-designed flow network.
     func prepareFlowNetworkExample() {
         clear()
-        
-        // the amount by which the x and y coordinates of each node should be adjusted
-        // relative to the bounds of the Graph
-        let dx = floor(bounds.width / 3.5)
-        let dy = min(floor(bounds.height / 3), 250)
-        
-        for i in 1...4 {
-            var x = bounds.midX
-            var y = bounds.midY
-            
-            switch i {
-            case 1:
-                x -= dx
-            case 2:
-                y -= dy
-            case 3:
-                y += dy
-            case 4:
-                x += dx
-            default:
-                continue
-            }
-            
-            let point = CGPoint(x: x, y: y)
-            let node = Node(color: colorGenerator.nextColor(), at: point)
-            
-            node.label.text = String(i)
-            
-            graph.nodeMatrix[node] = Set<Node>()
-            graph.nodes.append(node)
-            addSubview(node)
-        }
-        
-        // create edge from 1 to 2
-        let first = Edge(from: graph.nodes[0], to: graph.nodes[1])
-        first.weight = 5
-        first.updateLabel()
-        addEdge(first)
-        
-        // edge from 1 to 3
-        let second = Edge(from: graph.nodes[0], to: graph.nodes[2])
-        second.weight = 5
-        second.updateLabel()
-        addEdge(second)
-        
-        // edge from 2 to 3
-        let third = Edge(from: graph.nodes[1], to: graph.nodes[2])
-        third.weight = 3
-        third.updateLabel()
-        addEdge(third)
-        
-        // edge from 2 to 4
-        let fourth = Edge(from: graph.nodes[1], to: graph.nodes[3])
-        fourth.weight = 3
-        fourth.updateLabel()
-        addEdge(fourth)
-        
-        // edge from 3 to 4
-        let fifth = Edge(from: graph.nodes[2], to: graph.nodes[3])
-        fifth.weight = 7
-        fifth.updateLabel()
-        addEdge(fifth)
+        graph = Graph.flowNetworkTemplate(graphView: self)
     }
     
     /// Called when all touches on the screen have ended.
