@@ -69,7 +69,7 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
     
     @IBOutlet weak var trashButton: UIBarButtonItem!
     
-    @IBOutlet var graph: Graph!
+    @IBOutlet var graph: GraphView!
     
     @IBAction func increaseSelectedEdgeWeight(_ sender: UIBarButtonItem) {
         graph.shiftSelectedEdgeWeight(by: 1)

@@ -7,7 +7,13 @@
 
 import UIKit
 
-class Graph: UIView {
+class GraphData {
+    var nodes = [Node]()
+    var edges = Set<Edge>()
+    var nodeMatrix = [Node: Set<Node>]()
+}
+
+class GraphView: UIView {
     
     let colorGenerator = ColorGenerator()
     
@@ -26,20 +32,13 @@ class Graph: UIView {
     /// Determines whether the graph draws directed or undirected edges.
     var isDirected: Bool = true {
         didSet {
-            for edge in edges {
+            for edge in graphData.edges {
                 edge.setNeedsDisplay()
             }
         }
     }
     
-    /// All nodes in the graph.
-    var nodes = [Node]()
-    
-    /// All edges in the graph.
-    var edges = Set<Edge>()
-    
-    /// Matrix representation of the graph.
-    var nodeMatrix = [Node: Set<Node>]()
+    var graphData = GraphData()
     
     /// Nodes that have been selected.
     var selectedNodes = [Node]()
@@ -62,13 +61,13 @@ class Graph: UIView {
         }
         
         // delete all nodes
-        nodes.removeAll()
+        graphData.nodes.removeAll()
         
         // delete all edges
-        edges.removeAll()
+        graphData.edges.removeAll()
         
         // reset matrix form
-        nodeMatrix.removeAll()
+        graphData.nodeMatrix.removeAll()
         
         // reset color cycle
         colorGenerator.reset()
@@ -88,7 +87,7 @@ class Graph: UIView {
     ///
     func edge(from a: Node, to b: Node, directed: Bool = true) -> Edge? {
         if directed {
-            return edges.first(where: { $0.startNode == a && $0.endNode == b })
+            return graphData.edges.first(where: { $0.startNode == a && $0.endNode == b })
         } else {
             for edge in a.edges {
                 if edge.endNode == b || edge.startNode == b {
@@ -119,10 +118,10 @@ class Graph: UIView {
             sendSubviewToBack(edge)
             
             // add to edge set
-            edges.insert(edge)
+            graphData.edges.insert(edge)
             
             // add connection to matrix
-            nodeMatrix[a]?.insert(b)
+            graphData.nodeMatrix[a]?.insert(b)
         }
         
         // deselect nodes
@@ -145,10 +144,10 @@ class Graph: UIView {
         sendSubviewToBack(edge)
         
         // add to edge set
-        edges.insert(edge)
+        graphData.edges.insert(edge)
         
         // add connection to matrix
-        nodeMatrix[edge.startNode]?.insert(edge.endNode)
+        graphData.nodeMatrix[edge.startNode]?.insert(edge.endNode)
     }
     
     /// Adds a new node to the graph at the location of the touch(es) given.
@@ -162,13 +161,13 @@ class Graph: UIView {
             
             // create new node at location of touch
             let node = Node(color: colorGenerator.nextColor(), at: location)
-            node.label.text = String(nodes.count + 1)
+            node.label.text = String(graphData.nodes.count + 1)
             
             // add node to nodes array
-            nodes.append(node)
+            graphData.nodes.append(node)
             
             // add node to matrix representation
-            nodeMatrix[node] = Set<Node>()
+            graphData.nodeMatrix[node] = Set<Node>()
             
             // add new node to the view
             addSubview(node)
@@ -252,7 +251,7 @@ class Graph: UIView {
         
         // if resetEdgeProperties is true, reset flow for all edges back to nil
         if resetEdgeProperties {
-            for edge in edges {
+            for edge in graphData.edges {
                 edge.flow = nil
                 edge.updateLabel()
             }
@@ -260,11 +259,11 @@ class Graph: UIView {
         
         // unhighlight all nodes and edges
         if unhighlight {
-            for node in nodes {
+            for node in graphData.nodes {
                 node.highlighted(false)
             }
             
-            for edge in edges {
+            for edge in graphData.edges {
                 edge.highlighted(false)
             }
         }
@@ -299,10 +298,10 @@ class Graph: UIView {
         }
         
         // remove node from the nodes array
-        nodes.remove(at: nodes.firstIndex(of: node)!)
+        graphData.nodes.remove(at: graphData.nodes.firstIndex(of: node)!)
         
         // remove node from the matrix
-        nodeMatrix.removeValue(forKey: node)
+        graphData.nodeMatrix.removeValue(forKey: node)
     }
     
     /// Deletes all selected nodes and their edges.
@@ -333,10 +332,10 @@ class Graph: UIView {
             selectedNodes.last!.edges.remove(edge)
             
             // remove from edges set
-            edges.remove(edge)
+            graphData.edges.remove(edge)
             
             // remove edge from matrix
-            nodeMatrix[edge.startNode]?.remove(edge.endNode)
+            graphData.nodeMatrix[edge.startNode]?.remove(edge.endNode)
             
             updatePropertiesToolbar()
         }
@@ -345,18 +344,18 @@ class Graph: UIView {
     /// Removes all edges from the graph.
     func removeAllEdges() {
         // remove all edges from each node and empty all connections from the matrix
-        for node in nodes {
+        for node in graphData.nodes {
             node.edges.removeAll()
-            nodeMatrix[node]?.removeAll()
+            graphData.nodeMatrix[node]?.removeAll()
         }
         
         // remove all edges from view
-        for edge in edges {
+        for edge in graphData.edges {
             edge.removeFromSuperview()
         }
         
         // remove all from edges set
-        edges.removeAll()
+        graphData.edges.removeAll()
     }
     
     /// Shifts a selected edge's weight by a given integer value.
@@ -378,7 +377,7 @@ class Graph: UIView {
     /// - parameter to: The weight that will be applied to all edges.
     ///
     func resetAllEdgeWeights(to weight: Int = 1) {
-        for edge in edges {
+        for edge in graphData.edges {
             edge.weight = weight
             edge.updateLabel()
         }
@@ -387,13 +386,13 @@ class Graph: UIView {
     /// Renumbers all nodes by the order that they were added to the graph.
     func renumberNodes() {
         // proceed if there are any nodes to renumber
-        guard !nodes.isEmpty else {
+        guard !graphData.nodes.isEmpty else {
             Announcement.new(title: "Renumber Nodes", message: "There are no nodes to renumber.")
             return
         }
         
         // renumber by index + 1
-        for (index, node) in nodes.enumerated() {
+        for (index, node) in graphData.nodes.enumerated() {
             node.label.text = String(index + 1)
             node.setNeedsDisplay()
         }
@@ -422,8 +421,8 @@ class Graph: UIView {
         
         deselectNodes()
     
-        let algorithm = DijkstraShortestPath(self)
-        var traversals: [Path] = algorithm.go(from: a, to: b)
+        let algorithm = DijkstraShortestPath(graphData)
+        var traversals: [Path] = algorithm.go(from: a, to: b, isDirected: isDirected)
         
         if traversals.count > 1 {
             let shortestPath = traversals.removeLast()
@@ -454,8 +453,9 @@ class Graph: UIView {
             })
         }
         
-        let algorithm = PrimMinimumSpanningTree(self)
-        let path = algorithm.go()
+        let algorithm = PrimMinimumSpanningTree(graphData)
+        let path = algorithm.go(root: selectedNodes.first!)
+        deselectNodes()
         path.outline(wait: 0)
     }
     
@@ -467,7 +467,7 @@ class Graph: UIView {
         mode = .viewOnly
         
         func resumeFunction() {
-            var s = [Edge](edges) // all edges in the graph
+            var s = [Edge](graphData.edges) // all edges in the graph
             var f = Set<Set<Node>>() // forest of trees
             
             let e = Path() // edges in the final tree
@@ -478,7 +478,7 @@ class Graph: UIView {
             })
             
             // create tree in forest for each node
-            for node in nodes {
+            for node in graphData.nodes {
                 var tree = Set<Node>()
                 tree.insert(node)
                 
@@ -540,7 +540,7 @@ class Graph: UIView {
         // Create a network structure to emulate a residual graph.
         var reverse = [Edge: Edge]()
         var net = [Node: Set<Edge>]()
-        for edge in edges {
+        for edge in graphData.edges {
             edge.flow = 0
             
             let backwardEdge = Edge()
@@ -623,7 +623,7 @@ class Graph: UIView {
     
     /// Bron-Kerbosch maximal clique algorithm
     func bronKerbosch() {
-        guard nodes.count > 1 else {
+        guard graphData.nodes.count > 1 else {
             Announcement.new(title: "Bron-Kerbosch Maximal Clique", message: "The graph must have 2 or more nodes in order for Bron-Kerbosch to run.")
             return
         }
@@ -669,7 +669,7 @@ class Graph: UIView {
         
         // initial sets for the algorithm
         var r = Set<Node>()
-        var p = Set<Node>(nodes)
+        var p = Set<Node>(graphData.nodes)
         var x = Set<Node>()
         
         recurse(r: &r, p: &p, x: &x)
@@ -713,37 +713,37 @@ class Graph: UIView {
             
             node.label.text = String(i)
             
-            nodeMatrix[node] = Set<Node>()
-            nodes.append(node)
+            graphData.nodeMatrix[node] = Set<Node>()
+            graphData.nodes.append(node)
             addSubview(node)
         }
         
         // create edge from 1 to 2
-        let first = Edge(from: nodes[0], to: nodes[1])
+        let first = Edge(from: graphData.nodes[0], to: graphData.nodes[1])
         first.weight = 5
         first.updateLabel()
         addEdge(first)
         
         // edge from 1 to 3
-        let second = Edge(from: nodes[0], to: nodes[2])
+        let second = Edge(from: graphData.nodes[0], to: graphData.nodes[2])
         second.weight = 5
         second.updateLabel()
         addEdge(second)
         
         // edge from 2 to 3
-        let third = Edge(from: nodes[1], to: nodes[2])
+        let third = Edge(from: graphData.nodes[1], to: graphData.nodes[2])
         third.weight = 3
         third.updateLabel()
         addEdge(third)
         
         // edge from 2 to 4
-        let fourth = Edge(from: nodes[1], to: nodes[3])
+        let fourth = Edge(from: graphData.nodes[1], to: graphData.nodes[3])
         fourth.weight = 3
         fourth.updateLabel()
         addEdge(fourth)
         
         // edge from 3 to 4
-        let fifth = Edge(from: nodes[2], to: nodes[3])
+        let fifth = Edge(from: graphData.nodes[2], to: graphData.nodes[3])
         fifth.weight = 7
         fifth.updateLabel()
         addEdge(fifth)

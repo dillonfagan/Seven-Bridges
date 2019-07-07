@@ -244,7 +244,7 @@ import UIKit
             return
         }
         
-        let graph = superview as! Graph
+        let graph = superview as! GraphView
         
         if graph.mode == .select || graph.mode == .edges {
             graph.select(self)
@@ -257,7 +257,7 @@ import UIKit
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         // do not allow dragging in view-only mode
-        guard (superview as! Graph).mode != .viewOnly else { return }
+        guard (superview as! GraphView).mode != .viewOnly else { return }
         
         for touch in touches {
             let location = touch.location(in: self)

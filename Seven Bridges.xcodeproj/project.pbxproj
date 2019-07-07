@@ -22,7 +22,7 @@
 		5186D1DD200C41E60043E175 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5186D1DC200C41E60043E175 /* Announcement.swift */; };
 		519732D6228FC7710034AE0A /* GraphMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519732D5228FC7710034AE0A /* GraphMode.swift */; };
 		519732DF229051110034AE0A /* ColorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519732DE229051110034AE0A /* ColorGenerator.swift */; };
-		51B24C471EFDC9DF00AE209F /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B24C461EFDC9DF00AE209F /* Graph.swift */; };
+		51B24C471EFDC9DF00AE209F /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B24C461EFDC9DF00AE209F /* GraphView.swift */; };
 		51CA75C01F687776003D7F2D /* ActionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CA75BF1F687776003D7F2D /* ActionsController.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +44,7 @@
 		5186D1DC200C41E60043E175 /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
 		519732D5228FC7710034AE0A /* GraphMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphMode.swift; sourceTree = "<group>"; };
 		519732DE229051110034AE0A /* ColorGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorGenerator.swift; sourceTree = "<group>"; };
-		51B24C461EFDC9DF00AE209F /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		51B24C461EFDC9DF00AE209F /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		51CA75BF1F687776003D7F2D /* ActionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,7 +83,7 @@
 				51839D0F1EFD9240003B7B40 /* ViewController.swift */,
 				51CA75BF1F687776003D7F2D /* ActionsController.swift */,
 				5186D1DC200C41E60043E175 /* Announcement.swift */,
-				51B24C461EFDC9DF00AE209F /* Graph.swift */,
+				51B24C461EFDC9DF00AE209F /* GraphView.swift */,
 				519732D5228FC7710034AE0A /* GraphMode.swift */,
 				519732DE229051110034AE0A /* ColorGenerator.swift */,
 				511031E01FC50CCB0062F026 /* Path.swift */,
@@ -183,7 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5186D1DD200C41E60043E175 /* Announcement.swift in Sources */,
-				51B24C471EFDC9DF00AE209F /* Graph.swift in Sources */,
+				51B24C471EFDC9DF00AE209F /* GraphView.swift in Sources */,
 				511031E11FC50CCB0062F026 /* Path.swift in Sources */,
 				51CA75C01F687776003D7F2D /* ActionsController.swift in Sources */,
 				51839D101EFD9240003B7B40 /* ViewController.swift in Sources */,

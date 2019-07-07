@@ -7,12 +7,12 @@ public class PrimMinimumSpanningTree: Algorithm {
     private var parent = [Node: Node?]()
     private var children = [Node: [Node]]()
     
-    override init(_ graph: Graph) {
+    override init(_ graph: GraphData) {
         super.init(graph)
         pool = Set<Node>(self.graph.nodes)
     }
     
-    func go() -> Path {
+    func go(root: Node) -> Path {
         // finds the node with the minimum distance from a dictionary
         func getMin(from d: [Node: Int]) -> Node {
             var shortest: Node?
@@ -33,7 +33,6 @@ public class PrimMinimumSpanningTree: Algorithm {
             children[node] = [Node]()
         }
         
-        let root = graph.selectedNodes.first!
         distance[root] = 0 // distance from root to itself is 0
         
         while !pool.isEmpty {
@@ -54,8 +53,6 @@ public class PrimMinimumSpanningTree: Algorithm {
                 }
             }
         }
-        
-        graph.deselectNodes()
         
         return buildPath(from: root)
     }

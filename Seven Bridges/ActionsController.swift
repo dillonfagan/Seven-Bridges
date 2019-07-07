@@ -13,7 +13,7 @@ class ActionsController: UITableViewController {
     weak var viewControllerDelegate: ViewController!
     
     /// The graph that the actions will be applied to.
-    weak var graph: Graph!
+    weak var graph: GraphView!
     
     /// Dismisses the view when the close button is tapped.
     ///

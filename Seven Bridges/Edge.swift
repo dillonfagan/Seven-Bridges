@@ -217,7 +217,7 @@ import UIKit
         linePath.addLines(between: points, transform: transform)
         
         // add arrow for directed graph
-        if (superview as! Graph).isDirected {
+        if (superview as! GraphView).isDirected {
             let tipPoint = CGPoint(x: length - Node.radius, y: 0)
             
             linePath.move(to: tipPoint, transform: transform)
@@ -244,7 +244,7 @@ import UIKit
         } else {
             // set color of line to stroke color of start node if graph is directed
             // otherwise, stroke color is gray
-            if (superview as! Graph).isDirected {
+            if (superview as! GraphView).isDirected {
                 startNode.color.setStroke()
             } else {
                 UIColor.lightGray.setStroke()
