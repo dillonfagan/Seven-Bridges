@@ -18,15 +18,7 @@ class Graph {
     
     func remove(_ node: Node) {
         for edge in node.edges {
-            // remove edge from its start node
-            if let index = edge.startNode?.edges.firstIndex(of: edge) {
-                edge.startNode?.edges.remove(at: index)
-            }
-            
-            // remove edge from its end node
-            if let index = edge.endNode?.edges.firstIndex(of: edge) {
-                edge.endNode?.edges.remove(at: index)
-            }
+            removeEdgeFromNodes(edge)
         }
         
         nodes.remove(at: nodes.firstIndex(of: node)!)
@@ -35,6 +27,25 @@ class Graph {
         for (_, var adjacents) in nodeMatrix {
             adjacents.remove(node)
         }
+    }
+    
+    private func removeEdgeFromNodes(_ edge: Edge) {
+        // remove edge from its start node
+        if let index = edge.startNode?.edges.firstIndex(of: edge) {
+            edge.startNode?.edges.remove(at: index)
+        }
+        
+        // remove edge from its end node
+        if let index = edge.endNode?.edges.firstIndex(of: edge) {
+            edge.endNode?.edges.remove(at: index)
+        }
+    }
+    
+    func remove(_ edge: Edge) {
+        removeEdgeFromNodes(edge)
+        edges.remove(edge)
+        nodeMatrix[edge.startNode]?.remove(edge.endNode)
+        nodeMatrix[edge.endNode]?.remove(edge.startNode)
     }
     
     func edge(from a: Node, to b: Node, isDirected: Bool = true) -> Edge? {

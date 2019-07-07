@@ -231,19 +231,8 @@ class GraphView: UIView {
     /// The two selected nodes on each end will remain selected after the edge is removed.
     func removeSelectedEdge() {
         if let edge = selectedEdge {
-            // remove from view
             edge.removeFromSuperview()
-            
-            // remove from both ends (nodes)
-            selectedNodes.first!.edges.remove(edge)
-            selectedNodes.last!.edges.remove(edge)
-            
-            // remove from edges set
-            graph.edges.remove(edge)
-            
-            // remove edge from matrix
-            graph.nodeMatrix[edge.startNode]?.remove(edge.endNode)
-            
+            graph.remove(edge)
             updatePropertiesToolbar()
         }
     }
