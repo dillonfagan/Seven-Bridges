@@ -9,7 +9,7 @@ import UIKit
 
 class GraphView: UIView {
     
-    let colorGenerator = ColorGenerator()
+    private let colorGenerator = ColorGenerator()
     
     /// Determines the interactive behavior of the graph.
     /// When the graph is in view-only mode, the actions menu in the main view controller will be disabled.
@@ -64,30 +64,12 @@ class GraphView: UIView {
     /// - parameter to: The edge's end node.
     ///
     func addEdge(from a: Node, to b: Node) {
-        // check to make sure a and b are not the same node and do not already have a common edge
         if a != b && !b.isAdjacent(to: a) {
-            // create the edge
             let edge = Edge(from: a, to: b)
-            
-            // add edge to the graph
-            addSubview(edge)
-            
-            // send edge to the back
-            sendSubviewToBack(edge)
-            
-            // add to edge set
-            graph.edges.insert(edge)
-            
-            // add connection to matrix
-            graph.nodeMatrix[a]?.insert(b)
+            addEdge(edge)
         }
         
-        // deselect nodes
-        a.isSelected = false
-        b.isSelected = false
-        
-        // clear selected nodes
-        selectedNodes.removeAll()
+        deselectNodes()
     }
     
     /// Adds a given edge to the graph.
@@ -95,17 +77,9 @@ class GraphView: UIView {
     /// - parameter edge: The edge to be added to the graph.
     ///
     func addEdge(_ edge: Edge) {
-        // add edge to the graph
+        graph.add(edge)
         addSubview(edge)
-        
-        // send edge to the back
         sendSubviewToBack(edge)
-        
-        // add to edge set
-        graph.edges.insert(edge)
-        
-        // add connection to matrix
-        graph.nodeMatrix[edge.startNode]?.insert(edge.endNode)
     }
     
     /// Adds a new node to the graph at the location of the touch(es) given.
@@ -114,20 +88,11 @@ class GraphView: UIView {
     ///
     private func addNode(with touches: Set<UITouch>) {
         for touch in touches {
-            // get location of the touch
             let location = touch.location(in: self)
-            
-            // create new node at location of touch
             let node = Node(color: colorGenerator.nextColor(), at: location)
             node.label.text = String(graph.nodes.count + 1)
             
-            // add node to nodes array
-            graph.nodes.append(node)
-            
-            // add node to matrix representation
-            graph.nodeMatrix[node] = Set<Node>()
-            
-            // add new node to the view
+            graph.add(node)
             addSubview(node)
         }
     }
@@ -237,29 +202,13 @@ class GraphView: UIView {
     /// - parameter node: The node to be deleted.
     ///
     func delete(_ node: Node) {
-        // remove it from view
         node.removeFromSuperview()
         
         for edge in node.edges {
-            // remove edge from view
             edge.removeFromSuperview()
-            
-            // remove edge from its start node
-            if let index = edge.startNode?.edges.firstIndex(of: edge) {
-                edge.startNode?.edges.remove(at: index)
-            }
-            
-            // remove edge from its end node
-            if let index = edge.endNode?.edges.firstIndex(of: edge) {
-                edge.endNode?.edges.remove(at: index)
-            }
         }
         
-        // remove node from the nodes array
-        graph.nodes.remove(at: graph.nodes.firstIndex(of: node)!)
-        
-        // remove node from the matrix
-        graph.nodeMatrix.removeValue(forKey: node)
+        graph.remove(node)
     }
     
     /// Deletes all selected nodes and their edges.
