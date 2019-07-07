@@ -265,10 +265,7 @@ class GraphView: UIView {
     /// - parameter to: The weight that will be applied to all edges.
     ///
     func resetAllEdgeWeights(to weight: Int = 1) {
-        for edge in graph.edges {
-            edge.weight = weight
-            edge.updateLabel()
-        }
+        graph.resetAllEdgeWeights(to: weight)
     }
     
     /// Renumbers all nodes by the order that they were added to the graph.

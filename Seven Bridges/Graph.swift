@@ -57,6 +57,13 @@ class Graph {
         edges.removeAll()
     }
     
+    func resetAllEdgeWeights(to weight: Int = 1) {
+        for edge in edges {
+            edge.weight = weight
+            edge.updateLabel()
+        }
+    }
+    
     func edge(from a: Node, to b: Node, isDirected: Bool = true) -> Edge? {
         return isDirected ? edges.first(where: { $0.startNode == a && $0.endNode == b })
             : a.edges.first(where: { $0.startNode == b || $0.endNode == b })
