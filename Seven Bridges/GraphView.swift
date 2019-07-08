@@ -28,30 +28,20 @@ class GraphView: UIView {
     /// When the graph is in view-only mode, the actions menu in the main view controller will be disabled.
     var mode: GraphMode = .nodes {
         didSet {
-            if mode == .viewOnly {
-                parentVC?.actionsMenuButton.isEnabled = false
-            } else {
-                parentVC?.actionsMenuButton.isEnabled = true
-            }
+            parentVC?.actionsMenuButton.isEnabled = mode != .viewOnly
         }
     }
     
     /// Determines whether the graph draws directed or undirected edges.
     var isDirected: Bool = true {
         didSet {
-            for edge in graph.edges {
-                edge.setNeedsDisplay()
-            }
+            graph.edges.forEach({ (edge) in edge.setNeedsDisplay() })
         }
     }
     
     /// Clears the graph of all nodes and edges.
     func clear() {
-        // remove all subviews from the graph
-        for subview in subviews {
-            subview.removeFromSuperview()
-        }
-        
+        subviews.forEach({ (subview) in subview.removeFromSuperview() })
         deselectNodes()
         graph = Graph()
         colorGenerator.reset()
@@ -130,12 +120,8 @@ class GraphView: UIView {
     /// - parameter resetEdgeProperties: If true, edge flow for each edge will be reset to nil.
     ///
     func deselectNodes(unhighlight: Bool = false, resetEdgeProperties: Bool = false) {
-        // return all nodes in selected nodes array to original state
-        for node in selectedNodes {
-            node.isSelected = false
-        }
+        selectedNodes.forEach({ (node) in node.isSelected = false })
         
-        // if resetEdgeProperties is true, reset flow for all edges back to nil
         if resetEdgeProperties {
             for edge in graph.edges {
                 edge.flow = nil
@@ -143,18 +129,11 @@ class GraphView: UIView {
             }
         }
         
-        // unhighlight all nodes and edges
         if unhighlight {
-            for node in graph.nodes {
-                node.highlighted(false)
-            }
-            
-            for edge in graph.edges {
-                edge.highlighted(false)
-            }
+            graph.nodes.forEach({ (node) in node.highlighted(false) })
+            graph.edges.forEach({ (edge) in edge.highlighted(false) })
         }
         
-        // remove nodes from selected array
         selectedNodes.removeAll()
         
         parentVC?.updatePropertiesToolbar()
@@ -166,11 +145,7 @@ class GraphView: UIView {
     ///
     func delete(_ node: Node) {
         node.removeFromSuperview()
-        
-        for edge in node.edges {
-            edge.removeFromSuperview()
-        }
-        
+        graph.edges.forEach({ (edge) in edge.removeFromSuperview() })
         graph.remove(node)
     }
     
@@ -179,12 +154,7 @@ class GraphView: UIView {
         // proceed only if selectedNodes is not empty
         guard !selectedNodes.isEmpty else { return }
         
-        // delete all selected nodes
-        for node in selectedNodes {
-            delete(node)
-        }
-        
-        // empty the selectedNodes array
+        selectedNodes.forEach({ (node) in delete(node) })
         selectedNodes.removeAll()
         
         parentVC?.updatePropertiesToolbar()
@@ -202,10 +172,7 @@ class GraphView: UIView {
     
     /// Removes all edges from the graph.
     func removeAllEdges() {
-        for edge in graph.edges {
-            edge.removeFromSuperview()
-        }
-        
+        graph.edges.forEach({ (edge) in edge.removeFromSuperview() })
         graph.removeAllEdges()
     }
     
