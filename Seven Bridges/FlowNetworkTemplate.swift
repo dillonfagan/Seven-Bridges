@@ -37,43 +37,35 @@ extension Graph {
         // create edge from 1 to 2
         let first = Edge(from: flowNetwork.nodes[0], to: flowNetwork.nodes[1])
         first.weight = 5
-        first.updateLabel()
-        flowNetwork.add(first)
-        graphView.addSubview(first)
-        graphView.sendSubviewToBack(first)
+        addEdge(first, toGraph: flowNetwork, toView: graphView)
         
         // edge from 1 to 3
         let second = Edge(from: flowNetwork.nodes[0], to: flowNetwork.nodes[2])
         second.weight = 5
-        second.updateLabel()
-        flowNetwork.add(second)
-        graphView.addSubview(second)
-        graphView.sendSubviewToBack(second)
+        addEdge(second, toGraph: flowNetwork, toView: graphView)
         
         // edge from 2 to 3
         let third = Edge(from: flowNetwork.nodes[1], to: flowNetwork.nodes[2])
         third.weight = 3
-        third.updateLabel()
-        flowNetwork.add(third)
-        graphView.addSubview(third)
-        graphView.sendSubviewToBack(third)
+        addEdge(third, toGraph: flowNetwork, toView: graphView)
         
         // edge from 2 to 4
         let fourth = Edge(from: flowNetwork.nodes[1], to: flowNetwork.nodes[3])
         fourth.weight = 3
-        fourth.updateLabel()
-        flowNetwork.add(fourth)
-        graphView.addSubview(fourth)
-        graphView.sendSubviewToBack(fourth)
+        addEdge(fourth, toGraph: flowNetwork, toView: graphView)
         
         // edge from 3 to 4
         let fifth = Edge(from: flowNetwork.nodes[2], to: flowNetwork.nodes[3])
         fifth.weight = 7
-        fifth.updateLabel()
-        flowNetwork.add(fifth)
-        graphView.addSubview(fifth)
-        graphView.sendSubviewToBack(fifth)
+        addEdge(fifth, toGraph: flowNetwork, toView: graphView)
         
         return flowNetwork
+    }
+    
+    private static func addEdge(_ edge: Edge, toGraph graph: Graph, toView view: GraphView) {
+        edge.updateLabel()
+        graph.add(edge)
+        view.addSubview(edge)
+        view.sendSubviewToBack(edge)
     }
 }
