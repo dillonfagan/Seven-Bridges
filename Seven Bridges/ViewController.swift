@@ -146,11 +146,7 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
     
     func updatePropertiesToolbar() {
         // hide the toolbar if no nodes are selected
-        if graph.selectedNodes.isEmpty {
-           trashButton.isEnabled = false
-        } else {
-            trashButton.isEnabled = true
-        }
+        trashButton.isEnabled = !graph.selectedNodes.isEmpty
         
         // detect a selected edge between two nodes
         // if nil, disable UI elements related to a selected edge
