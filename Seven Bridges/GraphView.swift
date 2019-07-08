@@ -9,7 +9,20 @@ import UIKit
 
 class GraphView: UIView {
     
+    /// ViewController that contains the graph.
+    weak var parentVC: ViewController?
+    
     let colorGenerator = ColorGenerator()
+    
+    var graph = Graph()
+    
+    /// Nodes that have been selected.
+    var selectedNodes = [Node]()
+    
+    /// Returns the selected edge when exactly two adjacent nodes are selected. Otherwise, returns nil.
+    var selectedEdge: Edge? {
+        return selectedNodes.count == 2 ? graph.edge(from: selectedNodes.first!, to: selectedNodes.last!, isDirected: false) : nil
+    }
     
     /// Determines the interactive behavior of the graph.
     /// When the graph is in view-only mode, the actions menu in the main view controller will be disabled.
@@ -31,19 +44,6 @@ class GraphView: UIView {
             }
         }
     }
-    
-    var graph = Graph()
-    
-    /// Nodes that have been selected.
-    var selectedNodes = [Node]()
-    
-    /// Returns the selected edge when exactly two adjacent nodes are selected. Otherwise, returns nil.
-    var selectedEdge: Edge? {
-        return selectedNodes.count == 2 ? graph.edge(from: selectedNodes.first!, to: selectedNodes.last!, isDirected: false) : nil
-    }
-    
-    /// ViewController that contains the graph.
-    weak var parentVC: ViewController?
     
     /// Clears the graph of all nodes and edges.
     func clear() {
