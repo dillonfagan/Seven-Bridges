@@ -17,8 +17,8 @@ class Announcement {
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         }
         
-        // add the "Clear" button
-        alert.addAction(UIAlertAction(title: "Clear", style: .default, handler: action))
+        // add the "OK" button
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: action))
         
         // present the announcement
         UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
