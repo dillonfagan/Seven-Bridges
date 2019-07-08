@@ -55,7 +55,7 @@ class GraphView: UIView {
         deselectNodes()
         graph = Graph()
         colorGenerator.reset()
-        updatePropertiesToolbar()
+        parentVC?.updatePropertiesToolbar()
     }
     
     /// Adds an edge to the graph between two given nodes.
@@ -120,44 +120,7 @@ class GraphView: UIView {
         
         // as long as the graph is in select mode, update the properties toolbar
         if mode == .select {
-            updatePropertiesToolbar()
-        }
-    }
-    
-    /// Updates the appearance of the properties toolbar based on which nodes are selected.
-    private func updatePropertiesToolbar() {
-        // hide the toolbar if no nodes are selected
-        if selectedNodes.isEmpty {
-            parentVC?.trashButton.isEnabled = false
-        } else {
-            parentVC?.trashButton.isEnabled = true
-        }
-        
-        // detect a selected edge between two nodes
-        // if nil, disable UI elements related to a selected edge
-        if let edge = selectedEdge {
-            parentVC?.edgeWeightIndicator.title = String(edge.weight)
-            
-            parentVC?.edgeWeightMinusButton.title = "-"
-            parentVC?.edgeWeightMinusButton.isEnabled = true
-            
-            parentVC?.edgeWeightPlusButton.title = "+"
-            parentVC?.edgeWeightPlusButton.isEnabled = true
-            
-            parentVC?.removeEdgeButton.title = "Remove \(edge)"
-            parentVC?.removeEdgeButton.isEnabled = true
-        } else {
-            parentVC?.edgeWeightIndicator.title = ""
-            parentVC?.edgeWeightIndicator.isEnabled = false
-            
-            parentVC?.edgeWeightMinusButton.title = ""
-            parentVC?.edgeWeightMinusButton.isEnabled = false
-            
-            parentVC?.edgeWeightPlusButton.title = ""
-            parentVC?.edgeWeightPlusButton.isEnabled = false
-            
-            parentVC?.removeEdgeButton.title = ""
-            parentVC?.removeEdgeButton.isEnabled = false
+            parentVC?.updatePropertiesToolbar()
         }
     }
     
@@ -194,7 +157,7 @@ class GraphView: UIView {
         // remove nodes from selected array
         selectedNodes.removeAll()
         
-        updatePropertiesToolbar()
+        parentVC?.updatePropertiesToolbar()
     }
     
     /// Deletes a given node and its edges.
@@ -224,7 +187,7 @@ class GraphView: UIView {
         // empty the selectedNodes array
         selectedNodes.removeAll()
         
-        updatePropertiesToolbar()
+        parentVC?.updatePropertiesToolbar()
     }
     
     /// Removes the selected edge from the Graph.
@@ -233,7 +196,7 @@ class GraphView: UIView {
         if let edge = selectedEdge {
             edge.removeFromSuperview()
             graph.remove(edge)
-            updatePropertiesToolbar()
+            parentVC?.updatePropertiesToolbar()
         }
     }
     

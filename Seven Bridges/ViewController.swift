@@ -143,5 +143,41 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
             self.exitSelectMode(self.selectModeButton, graphWasJustCleared: true)
         }, cancelable: true)
     }
+    
+    func updatePropertiesToolbar() {
+        // hide the toolbar if no nodes are selected
+        if graph.selectedNodes.isEmpty {
+           trashButton.isEnabled = false
+        } else {
+            trashButton.isEnabled = true
+        }
+        
+        // detect a selected edge between two nodes
+        // if nil, disable UI elements related to a selected edge
+        if let edge = graph.selectedEdge {
+            edgeWeightIndicator.title = String(edge.weight)
+            
+            edgeWeightMinusButton.title = "-"
+            edgeWeightMinusButton.isEnabled = true
+            
+            edgeWeightPlusButton.title = "+"
+            edgeWeightPlusButton.isEnabled = true
+            
+            removeEdgeButton.title = "Remove \(edge)"
+            removeEdgeButton.isEnabled = true
+        } else {
+            edgeWeightIndicator.title = ""
+            edgeWeightIndicator.isEnabled = false
+            
+            edgeWeightMinusButton.title = ""
+            edgeWeightMinusButton.isEnabled = false
+            
+            edgeWeightPlusButton.title = ""
+            edgeWeightPlusButton.isEnabled = false
+            
+            removeEdgeButton.title = ""
+            removeEdgeButton.isEnabled = false
+        }
+    }
 }
 
