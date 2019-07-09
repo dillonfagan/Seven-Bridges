@@ -71,6 +71,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5119378F22D410DE00AFB3DA /* Graphing */ = {
+			isa = PBXGroup;
+			children = (
+				5119378322D2328900AFB3DA /* Graph.swift */,
+				511031E01FC50CCB0062F026 /* Path.swift */,
+				51839D1F1EFD95EC003B7B40 /* Node.swift */,
+				51839D211EFDABAB003B7B40 /* Edge.swift */,
+				5119378522D2466600AFB3DA /* FlowNetworkTemplate.swift */,
+			);
+			path = Graphing;
+			sourceTree = "<group>";
+		};
 		51839D011EFD9240003B7B40 = {
 			isa = PBXGroup;
 			children = (
@@ -91,23 +103,19 @@
 			isa = PBXGroup;
 			children = (
 				519732D7228FC8D20034AE0A /* Algorithms */,
+				5119378F22D410DE00AFB3DA /* Graphing */,
 				51839D0D1EFD9240003B7B40 /* AppDelegate.swift */,
 				51839D0F1EFD9240003B7B40 /* ViewController.swift */,
 				51CA75BF1F687776003D7F2D /* ActionsController.swift */,
 				5186D1DC200C41E60043E175 /* Announcement.swift */,
-				5119378322D2328900AFB3DA /* Graph.swift */,
 				51B24C461EFDC9DF00AE209F /* GraphView.swift */,
 				519732D5228FC7710034AE0A /* GraphMode.swift */,
 				519732DE229051110034AE0A /* ColorGenerator.swift */,
-				511031E01FC50CCB0062F026 /* Path.swift */,
-				51839D1F1EFD95EC003B7B40 /* Node.swift */,
-				51839D211EFDABAB003B7B40 /* Edge.swift */,
 				515714B52073E17C0046573A /* UILabel+Extension.swift */,
 				51839D111EFD9240003B7B40 /* Main.storyboard */,
 				51839D161EFD9240003B7B40 /* LaunchScreen.storyboard */,
 				51839D141EFD9240003B7B40 /* Assets.xcassets */,
 				51839D191EFD9240003B7B40 /* Info.plist */,
-				5119378522D2466600AFB3DA /* FlowNetworkTemplate.swift */,
 			);
 			path = "Seven Bridges";
 			sourceTree = "<group>";
