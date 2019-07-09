@@ -17,6 +17,7 @@
 		5119378A22D2654100AFB3DA /* FordFulkersonMaxFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119378922D2654100AFB3DA /* FordFulkersonMaxFlow.swift */; };
 		5119378C22D26A2900AFB3DA /* BronKerboschMaxClique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119378B22D26A2900AFB3DA /* BronKerboschMaxClique.swift */; };
 		5119378E22D2735200AFB3DA /* AlgorithmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119378D22D2735200AFB3DA /* AlgorithmController.swift */; };
+		5119379122D4A3E800AFB3DA /* PropertiesToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119379022D4A3E800AFB3DA /* PropertiesToolbar.swift */; };
 		515714B62073E17C0046573A /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515714B52073E17C0046573A /* UILabel+Extension.swift */; };
 		51839D0E1EFD9240003B7B40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51839D0D1EFD9240003B7B40 /* AppDelegate.swift */; };
 		51839D101EFD9240003B7B40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51839D0F1EFD9240003B7B40 /* ViewController.swift */; };
@@ -43,6 +44,7 @@
 		5119378922D2654100AFB3DA /* FordFulkersonMaxFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FordFulkersonMaxFlow.swift; sourceTree = "<group>"; };
 		5119378B22D26A2900AFB3DA /* BronKerboschMaxClique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BronKerboschMaxClique.swift; sourceTree = "<group>"; };
 		5119378D22D2735200AFB3DA /* AlgorithmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmController.swift; sourceTree = "<group>"; };
+		5119379022D4A3E800AFB3DA /* PropertiesToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesToolbar.swift; sourceTree = "<group>"; };
 		515714B52073E17C0046573A /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		51839D0A1EFD9240003B7B40 /* Seven Bridges.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Seven Bridges.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		51839D0D1EFD9240003B7B40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				5119378F22D410DE00AFB3DA /* Graphing */,
 				51839D0D1EFD9240003B7B40 /* AppDelegate.swift */,
 				51839D0F1EFD9240003B7B40 /* ViewController.swift */,
+				5119379022D4A3E800AFB3DA /* PropertiesToolbar.swift */,
 				51CA75BF1F687776003D7F2D /* ActionsController.swift */,
 				5186D1DC200C41E60043E175 /* Announcement.swift */,
 				51B24C461EFDC9DF00AE209F /* GraphView.swift */,
@@ -222,6 +225,7 @@
 				51839D0E1EFD9240003B7B40 /* AppDelegate.swift in Sources */,
 				519732D6228FC7710034AE0A /* GraphMode.swift in Sources */,
 				5119378422D2328900AFB3DA /* Graph.swift in Sources */,
+				5119379122D4A3E800AFB3DA /* PropertiesToolbar.swift in Sources */,
 				5119378222D17D8200AFB3DA /* PrimMinimumSpanningTree.swift in Sources */,
 				5119378122D17D8200AFB3DA /* DijkstraShortestPath.swift in Sources */,
 				519732DF229051110034AE0A /* ColorGenerator.swift in Sources */,

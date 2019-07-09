@@ -184,9 +184,7 @@ class GraphView: UIView {
         if let edge = selectedEdge {
             edge.weight += delta
             edge.updateLabel()
-            
-            // update weight label
-            parentVC?.edgeWeightIndicator.title = String(edge.weight)
+            parentVC?.updatePropertiesToolbar()
         }
     }
     

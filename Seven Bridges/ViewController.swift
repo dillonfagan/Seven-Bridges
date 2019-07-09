@@ -25,6 +25,7 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
         
         // set positioning delegate for the main toolbar
         mainToolbar.delegate = self
+        propertiesToolbar.graphView = graphView
         
         // prepare the actions menu
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -57,35 +58,9 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
     
     @IBOutlet weak var mainToolbar: UIToolbar!
     
-    @IBOutlet weak var propertiesToolbar: UIToolbar!
-    
-    @IBOutlet weak var edgeWeightPlusButton: UIBarButtonItem!
-    
-    @IBOutlet weak var edgeWeightMinusButton: UIBarButtonItem!
-    
-    @IBOutlet weak var edgeWeightIndicator: UIBarButtonItem!
-    
-    @IBOutlet weak var removeEdgeButton: UIBarButtonItem!
-    
-    @IBOutlet weak var trashButton: UIBarButtonItem!
+    @IBOutlet weak var propertiesToolbar: PropertiesToolbar!
     
     @IBOutlet var graphView: GraphView!
-    
-    @IBAction func increaseSelectedEdgeWeight(_ sender: UIBarButtonItem) {
-        graphView.shiftSelectedEdgeWeight(by: 1)
-    }
-    
-    @IBAction func decreaseSelectedEdgeWeight(_ sender: UIBarButtonItem) {
-        graphView.shiftSelectedEdgeWeight(by: -1)
-    }
-    
-    @IBAction func removeSelectedEdge(_ sender: UIBarButtonItem) {
-        graphView.removeSelectedEdge()
-    }
-    
-    @IBAction func deleteSelectedNodes(_ sender: UIBarButtonItem) {
-        graphView.deleteSelectedNodes()
-    }
     
     /// Called when the selectModeButton is tapped.
     @IBAction func selectButtonTapped(_ sender: UIBarButtonItem) {
@@ -146,35 +121,7 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
     
     // TODO: create states for the properties toolbar
     func updatePropertiesToolbar() {
-        // hide the toolbar if no nodes are selected
-        trashButton.isEnabled = !graphView.selectedNodes.isEmpty
-        
-        // detect a selected edge between two nodes
-        // if nil, disable UI elements related to a selected edge
-        if let edge = graphView.selectedEdge {
-            edgeWeightIndicator.title = String(edge.weight)
-            
-            edgeWeightMinusButton.title = "-"
-            edgeWeightMinusButton.isEnabled = true
-            
-            edgeWeightPlusButton.title = "+"
-            edgeWeightPlusButton.isEnabled = true
-            
-            removeEdgeButton.title = "Remove \(edge)"
-            removeEdgeButton.isEnabled = true
-        } else {
-            edgeWeightIndicator.title = ""
-            edgeWeightIndicator.isEnabled = false
-            
-            edgeWeightMinusButton.title = ""
-            edgeWeightMinusButton.isEnabled = false
-            
-            edgeWeightPlusButton.title = ""
-            edgeWeightPlusButton.isEnabled = false
-            
-            removeEdgeButton.title = ""
-            removeEdgeButton.isEnabled = false
-        }
+        propertiesToolbar.update()
     }
 }
 
