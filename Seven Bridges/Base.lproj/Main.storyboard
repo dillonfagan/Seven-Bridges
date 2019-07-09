@@ -111,7 +111,7 @@
                         <outlet property="edgeWeightMinusButton" destination="rQw-gE-GQy" id="4VQ-8f-xAd"/>
                         <outlet property="edgeWeightPlusButton" destination="akk-5O-cz9" id="xJs-Za-1Nv"/>
                         <outlet property="edgesModeButton" destination="So3-H1-JxB" id="SOV-sd-CwE"/>
-                        <outlet property="graph" destination="cri-lb-Lak" id="F4g-Uv-Flw"/>
+                        <outlet property="graphView" destination="cri-lb-Lak" id="F4g-Uv-Flw"/>
                         <outlet property="mainToolbar" destination="L0O-dN-50g" id="3TX-R8-cAd"/>
                         <outlet property="nodesModeButton" destination="i5c-yZ-CMU" id="oFM-8L-lnT"/>
                         <outlet property="propertiesToolbar" destination="edS-Wz-lfl" id="5GS-xq-2k2"/>

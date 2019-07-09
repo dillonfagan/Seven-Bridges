@@ -21,7 +21,7 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
     
     /// Perform additional setup when the view is ready to be shown.
     override func viewDidLoad() {
-        graph.parentVC = self
+        graphView.parentVC = self
         
         // set positioning delegate for the main toolbar
         mainToolbar.delegate = self
@@ -32,7 +32,7 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
         actionsNVC.modalPresentationStyle = .popover
         
         actionsVC = actionsNVC.topViewController as? ActionsController
-        actionsVC.graphView = graph
+        actionsVC.graphView = graphView
         actionsVC.viewControllerDelegate = self
     }
     
@@ -69,27 +69,27 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
     
     @IBOutlet weak var trashButton: UIBarButtonItem!
     
-    @IBOutlet var graph: GraphView!
+    @IBOutlet var graphView: GraphView!
     
     @IBAction func increaseSelectedEdgeWeight(_ sender: UIBarButtonItem) {
-        graph.shiftSelectedEdgeWeight(by: 1)
+        graphView.shiftSelectedEdgeWeight(by: 1)
     }
     
     @IBAction func decreaseSelectedEdgeWeight(_ sender: UIBarButtonItem) {
-        graph.shiftSelectedEdgeWeight(by: -1)
+        graphView.shiftSelectedEdgeWeight(by: -1)
     }
     
     @IBAction func removeSelectedEdge(_ sender: UIBarButtonItem) {
-        graph.removeSelectedEdge()
+        graphView.removeSelectedEdge()
     }
     
     @IBAction func deleteSelectedNodes(_ sender: UIBarButtonItem) {
-        graph.deleteSelectedNodes()
+        graphView.deleteSelectedNodes()
     }
     
     /// Called when the selectModeButton is tapped.
     @IBAction func selectButtonTapped(_ sender: UIBarButtonItem) {
-        if graph.mode != .select && graph.mode != .viewOnly {
+        if graphView.mode != .select && graphView.mode != .viewOnly {
             enterSelectMode(sender)
         } else {
             exitSelectMode(sender)
@@ -98,7 +98,7 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
     
     /// Puts the graph in select mode and updates the selectModeButton.
     func enterSelectMode(_ sender: UIBarButtonItem) {
-        graph.mode = .select
+        graphView.mode = .select
         
         sender.title = "Done"
         sender.style = .done
@@ -110,10 +110,10 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
     /// Puts the graph into nodes mode and updates the selectModeButton.
     func exitSelectMode(_ sender: UIBarButtonItem, graphWasJustCleared: Bool = false) {
         if !graphWasJustCleared {
-            graph.deselectNodes(unhighlight: true, resetEdgeProperties: true)
+            graphView.deselectNodes(unhighlight: true, resetEdgeProperties: true)
         }
         
-        graph.mode = .nodes
+        graphView.mode = .nodes
         
         sender.title = "Select"
         sender.style = .plain
@@ -124,11 +124,11 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
     }
     
     @IBAction func enterNodesMode(_ sender: UIBarButtonItem) {
-        graph.mode = .nodes
+        graphView.mode = .nodes
     }
     
     @IBAction func enterEdgesMode(_ sender: UIBarButtonItem) {
-        graph.mode = .edges
+        graphView.mode = .edges
     }
     
     @IBAction func openActionsPopover(_ sender: UIBarButtonItem) {
@@ -139,18 +139,19 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
     @IBAction func clearGraph(sender: UIBarButtonItem) {
         // prompt user before clearing graph
         Announcement.new(title: "Clear Graph", message: "Are you sure you want to clear the graph?", action: { (action: UIAlertAction!) -> Void in
-            self.graph.clear()
+            self.graphView.clear()
             self.exitSelectMode(self.selectModeButton, graphWasJustCleared: true)
         }, cancelable: true)
     }
     
+    // TODO: create states for the properties toolbar
     func updatePropertiesToolbar() {
         // hide the toolbar if no nodes are selected
-        trashButton.isEnabled = !graph.selectedNodes.isEmpty
+        trashButton.isEnabled = !graphView.selectedNodes.isEmpty
         
         // detect a selected edge between two nodes
         // if nil, disable UI elements related to a selected edge
-        if let edge = graph.selectedEdge {
+        if let edge = graphView.selectedEdge {
             edgeWeightIndicator.title = String(edge.weight)
             
             edgeWeightMinusButton.title = "-"
