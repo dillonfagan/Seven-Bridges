@@ -23,18 +23,10 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
     override func viewDidLoad() {
         graphView.parentVC = self
         
-        // set positioning delegate for the main toolbar
         mainToolbar.delegate = self
+        mainToolbar.parentVC = self
+        mainToolbar.graphView = graphView
         propertiesToolbar.graphView = graphView
-        
-        // prepare the actions menu
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        actionsNVC = storyboard.instantiateViewController(withIdentifier: "actionsNavController") as? UINavigationController
-        actionsNVC.modalPresentationStyle = .popover
-        
-        actionsVC = actionsNVC.topViewController as? ActionsController
-        actionsVC.graphView = graphView
-        actionsVC.viewControllerDelegate = self
     }
     
     /// Sets the position of the main toolbar to top so that its shadow is cast down instead of up.
@@ -42,44 +34,14 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
         return UIBarPosition.top
     }
     
-    /// The actions menu table view.
-    private var actionsVC: ActionsController!
-    
-    /// The actions menu navigation controller.
-    private var actionsNVC: UINavigationController!
-    
-    @IBOutlet weak var selectModeButton: UIBarButtonItem!
-    
-    @IBOutlet weak var nodesModeButton: UIBarButtonItem!
-    
-    @IBOutlet weak var edgesModeButton: UIBarButtonItem!
-    
-    @IBOutlet weak var actionsMenuButton: UIBarButtonItem!
-    
-    @IBOutlet weak var mainToolbar: UIToolbar!
-    
+    @IBOutlet weak var mainToolbar: MainToolbar!
     @IBOutlet weak var propertiesToolbar: PropertiesToolbar!
     
     @IBOutlet var graphView: GraphView!
     
-    /// Called when the selectModeButton is tapped.
-    @IBAction func selectButtonTapped(_ sender: UIBarButtonItem) {
-        if graphView.mode != .select && graphView.mode != .viewOnly {
-            enterSelectMode(sender)
-        } else {
-            exitSelectMode(sender)
-        }
-    }
-    
     /// Puts the graph in select mode and updates the selectModeButton.
     func enterSelectMode(_ sender: UIBarButtonItem) {
-        graphView.mode = .select
-        
-        sender.title = "Done"
-        sender.style = .done
-        
-        nodesModeButton.isEnabled = false
-        edgesModeButton.isEnabled = false
+        mainToolbar.enterSelectMode(sender)
     }
     
     /// Puts the graph into nodes mode and updates the selectModeButton.
@@ -92,31 +54,6 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
         
         sender.title = "Select"
         sender.style = .plain
-        
-        // re-enable toolbar buttons
-        nodesModeButton.isEnabled = true
-        edgesModeButton.isEnabled = true
-    }
-    
-    @IBAction func enterNodesMode(_ sender: UIBarButtonItem) {
-        graphView.mode = .nodes
-    }
-    
-    @IBAction func enterEdgesMode(_ sender: UIBarButtonItem) {
-        graphView.mode = .edges
-    }
-    
-    @IBAction func openActionsPopover(_ sender: UIBarButtonItem) {
-        actionsNVC.popoverPresentationController?.barButtonItem = sender
-        present(actionsNVC, animated: true)
-    }
-    
-    @IBAction func clearGraph(sender: UIBarButtonItem) {
-        // prompt user before clearing graph
-        Announcement.new(title: "Clear Graph", message: "Are you sure you want to clear the graph?", action: { (action: UIAlertAction!) -> Void in
-            self.graphView.clear()
-            self.exitSelectMode(self.selectModeButton, graphWasJustCleared: true)
-        }, cancelable: true)
     }
     
     // TODO: create states for the properties toolbar

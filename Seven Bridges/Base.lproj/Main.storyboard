@@ -64,38 +64,44 @@
                                     <outlet property="trashButton" destination="Ldv-SX-xIS" id="ZeD-qL-YsE"/>
                                 </connections>
                             </toolbar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L0O-dN-50g">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L0O-dN-50g" customClass="MainToolbar" customModule="Seven_Bridges" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                 <items>
                                     <barButtonItem title="Clear" id="IIX-sD-YGu">
                                         <connections>
-                                            <action selector="clearGraphWithSender:" destination="BYZ-38-t0r" id="23w-2D-tf0"/>
+                                            <action selector="clearGraphWithSender:" destination="L0O-dN-50g" id="9SV-XY-gh7"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Dtm-PG-W3d"/>
                                     <barButtonItem title="Select" id="Yun-qL-8ne">
                                         <connections>
-                                            <action selector="selectButtonTapped:" destination="BYZ-38-t0r" id="WcM-bq-z8n"/>
+                                            <action selector="selectButtonTapped:" destination="L0O-dN-50g" id="xNm-VV-CdQ"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem title="Node" id="i5c-yZ-CMU">
                                         <connections>
-                                            <action selector="enterNodesMode:" destination="BYZ-38-t0r" id="7a3-TA-t4H"/>
+                                            <action selector="enterNodesMode:" destination="L0O-dN-50g" id="Zkv-6n-AIf"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem title="Edge" id="So3-H1-JxB">
                                         <connections>
-                                            <action selector="enterEdgesMode:" destination="BYZ-38-t0r" id="lKi-wV-EUN"/>
+                                            <action selector="enterEdgesMode:" destination="L0O-dN-50g" id="4Ek-RG-Eup"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem title="Actions" id="043-P4-I9w">
                                         <color key="tintColor" red="0.75488656759999995" green="0.12855249639999999" blue="0.57453137639999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <action selector="openActionsPopover:" destination="BYZ-38-t0r" id="K8V-pG-1jd"/>
+                                            <action selector="openActionsPopover:" destination="L0O-dN-50g" id="Y3F-xv-TM8"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="actionsMenuButton" destination="043-P4-I9w" id="eSs-Cd-FP4"/>
+                                    <outlet property="edgesModeButton" destination="So3-H1-JxB" id="Toi-LN-kPp"/>
+                                    <outlet property="nodesModeButton" destination="i5c-yZ-CMU" id="NCd-z6-mQ9"/>
+                                    <outlet property="selectModeButton" destination="Yun-qL-8ne" id="5Oh-Jr-gpy"/>
+                                </connections>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -115,13 +121,9 @@
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="actionsMenuButton" destination="043-P4-I9w" id="Gup-rc-ORs"/>
-                        <outlet property="edgesModeButton" destination="So3-H1-JxB" id="SOV-sd-CwE"/>
                         <outlet property="graphView" destination="cri-lb-Lak" id="F4g-Uv-Flw"/>
-                        <outlet property="mainToolbar" destination="L0O-dN-50g" id="3TX-R8-cAd"/>
-                        <outlet property="nodesModeButton" destination="i5c-yZ-CMU" id="oFM-8L-lnT"/>
+                        <outlet property="mainToolbar" destination="L0O-dN-50g" id="s3Q-Cw-sSx"/>
                         <outlet property="propertiesToolbar" destination="edS-Wz-lfl" id="5GS-xq-2k2"/>
-                        <outlet property="selectModeButton" destination="Yun-qL-8ne" id="xV9-QU-oIi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

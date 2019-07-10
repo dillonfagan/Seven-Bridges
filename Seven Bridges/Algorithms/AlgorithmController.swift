@@ -63,7 +63,7 @@ class AlgorithmController {
     
     func kruskalMinimumSpanningTree(_ graphView: GraphView) {
         // enter select mode in order to properly clear highlighted edges when algorithm completes
-        graphView.parentVC?.enterSelectMode((graphView.parentVC?.selectModeButton)!)
+        graphView.parentVC?.enterSelectMode((graphView.parentVC?.mainToolbar.selectModeButton)!)
         
         graphView.mode = .viewOnly
         
@@ -111,7 +111,7 @@ class AlgorithmController {
         }
         
         // enter select mode in order to properly clear highlighted nodes when algorithm completes
-        graphView.parentVC?.enterSelectMode((graphView.parentVC?.selectModeButton)!)
+        graphView.parentVC?.enterSelectMode((graphView.parentVC?.mainToolbar.selectModeButton)!)
         
         graphView.mode = .viewOnly
         

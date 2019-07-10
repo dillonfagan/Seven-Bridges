@@ -28,7 +28,7 @@ class GraphView: UIView {
     /// When the graph is in view-only mode, the actions menu in the main view controller will be disabled.
     var mode: GraphMode = .nodes {
         didSet {
-            parentVC?.actionsMenuButton.isEnabled = mode != .viewOnly
+            parentVC?.mainToolbar.actionsMenuButton.isEnabled = mode != .viewOnly
         }
     }
     
