@@ -26,6 +26,7 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
         mainToolbar.delegate = self
         mainToolbar.parentVC = self
         mainToolbar.graphView = graphView
+        mainToolbar.buildActionsController()
         propertiesToolbar.graphView = graphView
     }
     
@@ -39,9 +40,12 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
     
     @IBOutlet var graphView: GraphView!
     
+    var previousGraphMode: GraphMode?
+    
     /// Puts the graph in select mode and updates the selectModeButton.
     func enterSelectMode(_ sender: UIBarButtonItem) {
         mainToolbar.enterSelectMode(sender)
+        previousGraphMode = graphView.mode
     }
     
     /// Puts the graph into nodes mode and updates the selectModeButton.
@@ -50,7 +54,7 @@ class ViewController: UIViewController, UIBarPositioningDelegate, UIToolbarDeleg
             graphView.deselectNodes(unhighlight: true, resetEdgeProperties: true)
         }
         
-        graphView.mode = .nodes
+        graphView.mode = previousGraphMode ?? .nodes
         
         sender.title = "Select"
         sender.style = .plain

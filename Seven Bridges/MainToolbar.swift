@@ -14,9 +14,7 @@ class MainToolbar: UIToolbar {
     var parentVC: ViewController!
     var graphView: GraphView!
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    func buildActionsController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         actionsNVC = storyboard.instantiateViewController(withIdentifier: "actionsNavController") as? UINavigationController
         actionsNVC.modalPresentationStyle = .popover
@@ -24,10 +22,6 @@ class MainToolbar: UIToolbar {
         actionsVC = actionsNVC.topViewController as? ActionsController
         actionsVC.graphView = graphView
         actionsVC.viewControllerDelegate = parentVC
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
     }
     
     @IBAction func selectButtonTapped(_ sender: UIBarButtonItem) {

@@ -144,8 +144,8 @@ class GraphView: UIView {
     /// - parameter node: The node to be deleted.
     ///
     func delete(_ node: Node) {
+        node.edges.forEach({ (edge) in edge.removeFromSuperview() })
         node.removeFromSuperview()
-        graph.edges.forEach({ (edge) in edge.removeFromSuperview() })
         graph.remove(node)
     }
     
