@@ -256,19 +256,21 @@ import UIKit
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // do not allow dragging in view-only mode
         guard (superview as! GraphView).mode != .viewOnly else { return }
         
         for touch in touches {
             let location = touch.location(in: self)
             let previousLocation = touch.previousLocation(in: self)
             
+            if abs(location.x - previousLocation.x) + abs(location.y - previousLocation.y) < 2 {
+                break
+            }
+            
             isBeingDragged = true
             
             frame = frame.offsetBy(dx: (location.x - previousLocation.x), dy: (location.y - previousLocation.y))
         }
         
-        // update size and origin of connected edges to move with node
         for edge in edges {
             edge.followConnectedNodes()
         }
