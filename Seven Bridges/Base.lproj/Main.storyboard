@@ -94,7 +94,7 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem title="Actions" id="043-P4-I9w">
-                                        <color key="tintColor" red="0.75488656759999995" green="0.12855249639999999" blue="0.57453137639999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="openActionsPopover:" destination="L0O-dN-50g" id="Y3F-xv-TM8"/>
                                         </connections>
