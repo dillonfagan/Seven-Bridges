@@ -85,7 +85,13 @@ import UIKit
         clipsToBounds = false
         
         label = UILabel(frame: CGRect(x: bounds.midX, y: bounds.midY, width: 64, height: 64))
-        label.textColor = UIColor.black
+        
+        if #available(iOS 13.0, *) {
+            label.textColor = UIColor.label
+        } else {
+            label.textColor = UIColor.black
+        }
+        
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = NSTextAlignment.left
         addSubview(label)

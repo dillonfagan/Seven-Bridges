@@ -262,7 +262,7 @@
 					};
 					51839D091EFD9240003B7B40 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = WXQLW5JEDU;
+						DevelopmentTeam = 8J32LU3U24;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
@@ -561,10 +561,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = WXQLW5JEDU;
+				DEVELOPMENT_TEAM = 8J32LU3U24;
 				INFOPLIST_FILE = "Seven Bridges/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.uri.dillonfagan.Seven-Bridges";
+				MARKETING_VERSION = 1.0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "DillonFagan.Seven-Bridges";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -574,10 +575,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = WXQLW5JEDU;
+				DEVELOPMENT_TEAM = 8J32LU3U24;
 				INFOPLIST_FILE = "Seven Bridges/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.uri.dillonfagan.Seven-Bridges";
+				MARKETING_VERSION = 1.0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "DillonFagan.Seven-Bridges";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
