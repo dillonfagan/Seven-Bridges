@@ -6,56 +6,44 @@ class GraphTests: XCTestCase {
     private var graph: Graph!
 
     override func setUp() {
-        graph = Graph()
-    }
-
-    func test_addNodeToGraph() {
-        let node = Node(at: CGPoint(x: 0, y: 0))
-        graph.add(node)
-        
-        XCTAssertEqual(graph.nodes.count, 1)
+        graph = buildGraph()
     }
     
-    func test_addEdgeBetweenNodes_graphHasOneEdge() {
-        let _ = addEdgeBetweenNodes()
-        XCTAssert(graph.edges.count == 1)
-    }
-
-    private func addEdgeBetweenNodes() -> (Node, Node) {
+    private func buildGraph() -> Graph {
+        let graph = Graph()
+        
         let nodeA = Node(at: CGPoint(x: 0, y: 0))
         let nodeB = Node(at: CGPoint(x: 10, y: 10))
         let edge = Edge(from: nodeA, to: nodeB)
-
+        
         graph.add(nodeA)
         graph.add(nodeB)
         graph.add(edge)
+        
+        return graph
+    }
 
-        return (nodeA, nodeB)
+    func test_addTwoNodesToGraph() {
+        XCTAssertEqual(graph.nodes.count, 2)
+    }
+    
+    func test_addEdgeBetweenNodes_graphHasOneEdge() {
+        XCTAssert(graph.edges.count == 1)
     }
 
     func test_addEdgeBetweenNodes_correctStartNode() {
-        let (nodeA, _) = addEdgeBetweenNodes()
-        XCTAssert(graph.edges.first!.startNode == nodeA)
+        XCTAssert(graph.edges.first!.startNode == graph.nodes.first!)
     }
 
     func test_addEdgeBetweenNodes_correctEndNode() {
-        let (_, nodeB) = addEdgeBetweenNodes()
-        XCTAssert(graph.edges.first!.endNode == nodeB)
+        XCTAssert(graph.edges.first!.endNode == graph.nodes.last!)
     }
     
-//    func test_dank() {
-//        let nodeA = Node(at: CGPoint(x: 0, y: 0))
-//        let nodeB = Node(at: CGPoint(x: 10, y: 10))
-//        let nodeC = Node(at: CGPoint(x: 10, y: 20))
-//
-//        let edgeAB = Edge(from: nodeA, to: nodeB)
-//        let edgeBC = Edge(from: nodeA, to: nodeC)
-//
-//        graph.add(nodeA)
-//        graph.add(nodeB)
-//        graph.add(nodeC)
-//        graph.add(edgeAB)
-//        graph.add(edgeBC)
-//    }
+    func test_swapToUndirectedGraph() {
+        graph = buildGraph()
+        graph = UndirectedGraph(graph)
+        
+        XCTAssert(graph.nodes.count == 2)
+    }
 
 }
