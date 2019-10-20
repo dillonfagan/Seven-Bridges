@@ -1,9 +1,22 @@
 import Foundation
 
 class Graph {
-    var nodes = [Node]()
-    var edges = Set<Edge>()
-    var nodeMatrix = [Node: Set<Node>]()
+    
+    var nodes: [Node]
+    var edges: Set<Edge>
+    var nodeMatrix: [Node: Set<Node>]
+    
+    init() {
+        self.nodes = [Node]()
+        self.edges = Set<Edge>()
+        self.nodeMatrix = [Node: Set<Node>]()
+    }
+    
+    init(_ graph: Graph) {
+        self.nodes = graph.nodes
+        self.edges = graph.edges
+        self.nodeMatrix = graph.nodeMatrix
+    }
     
     func add(_ node: Node) {
         nodes.append(node)
@@ -68,4 +81,13 @@ class Graph {
         return isDirected ? edges.first(where: { $0.startNode == a && $0.endNode == b })
             : a.edges.first(where: { $0.startNode == b || $0.endNode == b })
     }
+    
+}
+
+class UndirectedGraph: Graph {
+    
+    override func edge(from a: Node, to b: Node, isDirected: Bool = true) -> Edge? {
+        return a.edges.first(where: { $0.startNode == b || $0.endNode == b })
+    }
+    
 }

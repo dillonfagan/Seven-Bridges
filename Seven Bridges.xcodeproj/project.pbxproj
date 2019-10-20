@@ -36,13 +36,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5147F9F123553E0100AA61ED /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 51839D021EFD9240003B7B40 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 51839D091EFD9240003B7B40;
-			remoteInfo = "Seven Bridges";
-		};
 		5184431E2353BA9200268E78 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 51839D021EFD9240003B7B40 /* Project object */;
@@ -65,7 +58,6 @@
 		5119378D22D2735200AFB3DA /* AlgorithmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmController.swift; sourceTree = "<group>"; };
 		5119379022D4A3E800AFB3DA /* PropertiesToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertiesToolbar.swift; sourceTree = "<group>"; };
 		5119379222D570C200AFB3DA /* MainToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainToolbar.swift; sourceTree = "<group>"; };
-		5147F9EC23553E0100AA61ED /* SevenBridgesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SevenBridgesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		515714B52073E17C0046573A /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		51839D0A1EFD9240003B7B40 /* Seven Bridges.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Seven Bridges.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		51839D0D1EFD9240003B7B40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,13 +80,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5147F9E923553E0100AA61ED /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		51839D071EFD9240003B7B40 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -138,7 +123,6 @@
 			children = (
 				51839D0A1EFD9240003B7B40 /* Seven Bridges.app */,
 				518443192353BA9200268E78 /* GraphTests.xctest */,
-				5147F9EC23553E0100AA61ED /* SevenBridgesUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -193,24 +177,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5147F9EB23553E0100AA61ED /* SevenBridgesUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5147F9F523553E0100AA61ED /* Build configuration list for PBXNativeTarget "SevenBridgesUITests" */;
-			buildPhases = (
-				5147F9E823553E0100AA61ED /* Sources */,
-				5147F9E923553E0100AA61ED /* Frameworks */,
-				5147F9EA23553E0100AA61ED /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5147F9F223553E0100AA61ED /* PBXTargetDependency */,
-			);
-			name = SevenBridgesUITests;
-			productName = SevenBridgesUITests;
-			productReference = 5147F9EC23553E0100AA61ED /* SevenBridgesUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		51839D091EFD9240003B7B40 /* Seven Bridges */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 51839D1C1EFD9240003B7B40 /* Build configuration list for PBXNativeTarget "Seven Bridges" */;
@@ -256,12 +222,6 @@
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Dillon Fagan";
 				TargetAttributes = {
-					5147F9EB23553E0100AA61ED = {
-						CreatedOnToolsVersion = 11.1;
-						DevelopmentTeam = WXQLW5JEDU;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 51839D091EFD9240003B7B40;
-					};
 					51839D091EFD9240003B7B40 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 8J32LU3U24;
@@ -291,19 +251,11 @@
 			targets = (
 				51839D091EFD9240003B7B40 /* Seven Bridges */,
 				518443182353BA9200268E78 /* GraphTests */,
-				5147F9EB23553E0100AA61ED /* SevenBridgesUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5147F9EA23553E0100AA61ED /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		51839D081EFD9240003B7B40 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -324,13 +276,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5147F9E823553E0100AA61ED /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		51839D061EFD9240003B7B40 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -371,11 +316,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5147F9F223553E0100AA61ED /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 51839D091EFD9240003B7B40 /* Seven Bridges */;
-			targetProxy = 5147F9F123553E0100AA61ED /* PBXContainerItemProxy */;
-		};
 		5184431F2353BA9200268E78 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 51839D091EFD9240003B7B40 /* Seven Bridges */;
@@ -403,49 +343,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		5147F9F323553E0100AA61ED /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WXQLW5JEDU;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = SevenBridgesUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dillonwfagan.SevenBridgesUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Seven Bridges";
-			};
-			name = Debug;
-		};
-		5147F9F423553E0100AA61ED /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WXQLW5JEDU;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = SevenBridgesUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dillonwfagan.SevenBridgesUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Seven Bridges";
-			};
-			name = Release;
-		};
 		51839D1A1EFD9240003B7B40 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -641,15 +538,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5147F9F523553E0100AA61ED /* Build configuration list for PBXNativeTarget "SevenBridgesUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5147F9F323553E0100AA61ED /* Debug */,
-				5147F9F423553E0100AA61ED /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		51839D051EFD9240003B7B40 /* Build configuration list for PBXProject "Seven Bridges" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
