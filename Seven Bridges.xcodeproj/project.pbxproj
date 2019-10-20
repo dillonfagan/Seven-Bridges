@@ -33,6 +33,7 @@
 		519732DF229051110034AE0A /* ColorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519732DE229051110034AE0A /* ColorGenerator.swift */; };
 		51B24C471EFDC9DF00AE209F /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B24C461EFDC9DF00AE209F /* GraphView.swift */; };
 		51CA75C01F687776003D7F2D /* ActionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CA75BF1F687776003D7F2D /* ActionsController.swift */; };
+		51E2EC16235CB3E300544C22 /* GraphBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E2EC15235CB3E300544C22 /* GraphBuilderTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		51B24C461EFDC9DF00AE209F /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		51CA75BF1F687776003D7F2D /* ActionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsController.swift; sourceTree = "<group>"; };
 		51E2EC14235B499C00544C22 /* Seven Bridges.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Seven Bridges.entitlements"; sourceTree = "<group>"; };
+		51E2EC15235CB3E300544C22 /* GraphBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphBuilderTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 		5184431A2353BA9200268E78 /* GraphTests */ = {
 			isa = PBXGroup;
 			children = (
+				51E2EC15235CB3E300544C22 /* GraphBuilderTests.swift */,
 				5184431B2353BA9200268E78 /* GraphTests.swift */,
 				5184431D2353BA9200268E78 /* Info.plist */,
 			);
@@ -309,6 +312,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51E2EC16235CB3E300544C22 /* GraphBuilderTests.swift in Sources */,
 				5184431C2353BA9200268E78 /* GraphTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -23,7 +23,7 @@ class GraphTests: XCTestCase {
         return graph
     }
 
-    func test_addNodeToGraph() {
+    func test_addTwoNodesToGraph() {
         XCTAssertEqual(graph.nodes.count, 2)
     }
     
